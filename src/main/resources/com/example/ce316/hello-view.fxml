@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #3A2C63;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #3A2C63;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
   <children>
     <MenuBar style="-fx-background-color: #FFA258;">
       <menus>
@@ -54,12 +54,12 @@
       <children>
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #3A2C63;" />
-            <VBox alignment="CENTER" prefHeight="375.0" prefWidth="541.0" spacing="20" style="-fx-background-color: #4A3A7C;">
+            <VBox prefHeight="374.0" prefWidth="222.0" style="-fx-background-color: #3A2C63;" />
+            <VBox alignment="CENTER" prefHeight="375.0" prefWidth="541.0" spacing="20" style="-fx-background-color: #4A3A7C;" HBox.hgrow="ALWAYS">
               <children>
-                <Button mnemonicParsing="false" prefWidth="200.0" text="Create New Project" />
-                <Button mnemonicParsing="false" prefWidth="200.0" text="Open Existing Project" />
-                <Button mnemonicParsing="false" prefWidth="200.0" text="Assignment Reports" />
+                <Button fx:id="createNewProjectButton" mnemonicParsing="false" prefWidth="200.0" text="Create New Project" />
+                <Button fx:id="openExistingProjectButton" mnemonicParsing="false" onAction="#setOpenExistingProjectButton" prefWidth="200.0" text="Open Existing Project" />
+                <Button fx:id="assignmentReportsButton" mnemonicParsing="false" onAction="#setAssignmentReportsButton" prefWidth="200.0" text="Assignment Reports" />
               </children>
             </VBox>
           </children>
