@@ -36,11 +36,23 @@ public class HelloController {
     @FXML
     private Button BackButton;
 
+
     @FXML
     private URL location;
     @FXML
     private StackPane mainStackPane;
 
+    @FXML
+    private void createProject(ActionEvent event) {
+        // Code to handle creating a project
+        System.out.println("Project creation initiated.");
+    }
+
+    @FXML
+    private void cancel(ActionEvent event) {
+        // Code to handle cancellation
+        System.out.println("Operation cancelled.");
+    }
 
 
     @FXML
@@ -67,14 +79,14 @@ public class HelloController {
 
    }
 
-    /* public void setCreateNewProjectButton(ActionEvent e) throws IOException {
-
-        root = FXMLLoader.load(getClass().getResource("NewProject.fxml"));
+    public void setCreateNewProjectButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("CreateProject.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }*/
+    }
+
 
     public void setAssignmentReportsButton(ActionEvent e) throws IOException {
         root = FXMLLoader.load(getClass().getResource("ReportAssignment.fxml"));

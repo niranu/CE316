@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #4A3A7C; -fx-padding: 20;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+    <children>
+        <Label text="Create New Project" style="-fx-text-fill: white; -fx-font-size: 24px;" />
+        <TextField fx:id="projectNameField" promptText="Project Name" />
+        <ComboBox fx:id="languageComboBox" promptText="Select Programming Language">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Java" />
+                    <String fx:value="C++" />
+                    <String fx:value="Python" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <TextField fx:id="descriptionField" promptText="Project Description (optional)" />
+        <TextField fx:id="outputField" promptText="Expected Output (optional)" />
+        <Button text="Create Project" onAction="#createProject" style="-fx-background-color: #FFA258; -fx-text-fill: black;" />
+        <Button text="Back to Main Menu" onAction="#setBackButton" style="-fx-background-color: #FFA258; -fx-text-fill: black;" />
+        <Button text="Cancel" onAction="#cancel" style="-fx-background-color: #FFA258; -fx-text-fill: black;" />
+    </children>
+</VBox>
