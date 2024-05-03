@@ -57,7 +57,7 @@
             <VBox prefHeight="374.0" prefWidth="222.0" style="-fx-background-color: #3A2C63;" />
             <VBox alignment="CENTER" prefHeight="375.0" prefWidth="541.0" spacing="20" style="-fx-background-color: #4A3A7C;" HBox.hgrow="ALWAYS">
               <children>
-                <Button fx:id="createNewProjectButton" mnemonicParsing="false" prefWidth="200.0" text="Create New Project" />
+                <Button fx:id="createNewProjectButton" mnemonicParsing="false" onAction="#setCreateNewProjectButton" prefWidth="200.0" text="Create New Project" />
                 <Button fx:id="openExistingProjectButton" mnemonicParsing="false" onAction="#setOpenExistingProjectButton" prefWidth="200.0" text="Open Existing Project" />
                 <Button fx:id="assignmentReportsButton" mnemonicParsing="false" onAction="#setAssignmentReportsButton" prefWidth="200.0" text="Assignment Reports" />
               </children>
