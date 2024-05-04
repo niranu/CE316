@@ -1,65 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
-   <center>
-      <Pane prefHeight="466.0" prefWidth="614.0" style="-fx-background-color: #4A3A7C;">
-         <children>
-            <TextArea layoutX="23.0" layoutY="107.0" prefHeight="186.0" prefWidth="545.0" />
-            <ChoiceBox layoutX="30.0" layoutY="47.0" prefHeight="25.0" prefWidth="237.0" />
-            <Label layoutX="31.0" layoutY="30.0" text="Configuration" textFill="WHITE" />
-            <Label layoutX="23.0" layoutY="83.0" text="Assignment Description" textFill="WHITE" />
-            <Label layoutX="23.0" layoutY="303.0" text="Output" textFill="WHITE" />
-            <TextArea layoutX="25.0" layoutY="322.0" prefHeight="99.0" prefWidth="547.0" />
-         </children>
-      </Pane>
-   </center>
-   <left>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #3A2C63;" BorderPane.alignment="CENTER">
-         <children>
-            <ToolBar layoutX="35.0" layoutY="112.0" orientation="VERTICAL" prefHeight="243.0" prefWidth="121.0" style="-fx-background-color: #3A2C63;">
-              <items>
-                <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Open Assignment" textFill="WHITE" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Save" textFill="WHITE" />
-                  <Button fx:id="BackButton" mnemonicParsing="false" onAction="#setBackButton" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Back" textFill="WHITE" />
-              </items>
-            </ToolBar>
-         </children>
-      </Pane>
-   </left>
-   <bottom>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4A3A7C;" BorderPane.alignment="CENTER" />
-   </bottom>
-   <top>
-      <MenuBar style="-fx-background-color: #FFA258;" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+    <center>
+        <Pane prefHeight="466.0" prefWidth="614.0" style="-fx-background-color: #4A3A7C;">
+            <children>
+                <ChoiceBox layoutX="29.0" layoutY="109.0" prefHeight="25.0" prefWidth="237.0" />
+                <Label layoutX="29.0" layoutY="83.0" text="Configuration" textFill="WHITE" />
+                <Label layoutX="25.0" layoutY="145.0" text="Assignment Description" textFill="WHITE" />
+                <Label layoutX="23.0" layoutY="278.0" text="Output" textFill="WHITE" />
+                <TextArea layoutX="22.0" layoutY="295.0" prefHeight="53.0" prefWidth="547.0" />
+                <TextArea layoutX="23.0" layoutY="170.0" prefHeight="100.0" prefWidth="545.0" />
+                <TextField layoutX="29.0" layoutY="33.0" prefHeight="25.0" prefWidth="318.0" promptText="Please choose the project you want to edit" />
+                <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" layoutX="361.0" layoutY="33.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Open Assignment" textFill="WHITE" />
+                <Button layoutX="23.0" layoutY="361.0" mnemonicParsing="false" text="Upload File" />
+                <Button layoutX="449.0" layoutY="386.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Edit" textFill="WHITE" />
+                <Button fx:id="BackButton" layoutX="315.0" layoutY="386.0" mnemonicParsing="false" onAction="#setBackButton" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Back" textFill="WHITE" />
+                <Label layoutX="42.0" layoutY="6.0" text="Project Name" textFill="WHITE" />
+            </children>
+        </Pane>
+    </center>
+    <left>
+        <Pane prefHeight="441.0" prefWidth="123.0" style="-fx-background-color: #3A2C63;" BorderPane.alignment="CENTER" />
+    </left>
+    <top>
+        <MenuBar style="-fx-background-color: #FFA258;" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 </BorderPane>
