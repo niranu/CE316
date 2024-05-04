@@ -64,6 +64,7 @@
                         <Button fx:id="openExistingProjectButton" mnemonicParsing="false" onAction="#setOpenExistingProjectButton" prefWidth="200.0" text="Open Existing Project" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Upload files" />
                         <Button fx:id="assignmentReportsButton" mnemonicParsing="false" onAction="#setAssignmentReportsButton" prefHeight="25.0" prefWidth="200.0" text="Assignment Reports" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Configurations" />
                     </children>
                 </VBox>
             </items>
