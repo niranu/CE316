@@ -103,6 +103,14 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
+    public void setUploadStudentButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("upload_Student.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 
 

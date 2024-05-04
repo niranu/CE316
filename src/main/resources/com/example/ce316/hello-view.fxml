@@ -55,14 +55,14 @@
             <items>
                 <TextFlow minWidth="200.0" prefHeight="373.0" prefWidth="300.0" style="-fx-background-color: #3A2C63;" textAlignment="JUSTIFY">
                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="This is IAE project. This app helps teachers assess their student s work easily. They can see all the projects. Run them one after another and see studentś reports. Configurations is a important part of this project. If you have anything you don't understand about the app you can click the Help menu in the Menu bar and a detailed explanation will ghueghweuigpghwioesghisghweuiwuighsiohgiseughweuighwuieaghiusehgsugwhepgifwehjgsejvnisafhueisfhwieafnhsjfgsujghasighesgishguisghsuig\nheguiseghaslughseioghwsikhwsndgiuvh\sd;egihweiweahgoieawhgwseghiqwf" wrappingWidth="200.02149963378906" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="This is IAE project. This app helps teachers assess their student s work easily. They can see all the projects. Run them one after another and see studentś reports. Configurations is a important part of this project. If you have anything you don't understand about the app you can click the Help menu in the Menu bar and a detailed explanation will " wrappingWidth="200.02149963378906" />
                     </children>
                 </TextFlow>
                 <VBox alignment="CENTER" minWidth="300.0" prefHeight="375.0" prefWidth="379.0" spacing="20" style="-fx-background-color: #4A3A7C;">
                     <children>
                         <Button fx:id="createNewProjectButton" mnemonicParsing="false" onAction="#setCreateNewProjectButton" prefWidth="200.0" text="Create New Project" />
                         <Button fx:id="openExistingProjectButton" mnemonicParsing="false" onAction="#setOpenExistingProjectButton" prefWidth="200.0" text="Open Existing Project" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Upload student files" />
+                  <Button mnemonicParsing="false" onAction="#setUploadStudentButton" prefHeight="25.0" prefWidth="200.0" text="Upload student files" />
                         <Button fx:id="assignmentReportsButton" mnemonicParsing="false" onAction="#setAssignmentReportsButton" prefHeight="25.0" prefWidth="200.0" text="Assignment Reports" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Configurations" />
                     </children>
