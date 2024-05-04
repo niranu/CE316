@@ -66,6 +66,7 @@ public class HelloController {
 
    private Stage stage;
     private Scene scene;
+    @FXML
     private Parent root;
 
     public void setOpenExistingProjectButton(ActionEvent e) throws IOException {
