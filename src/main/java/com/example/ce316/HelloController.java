@@ -111,6 +111,18 @@ public class HelloController {
         stage.show();
     }
 
+    public void setConfigurations(ActionEvent e) throws IOException {
+
+        //Pane view = new FXMLLoader(HelloApplication.class.getResource("OpenExisting.fxml")).load();
+        root = FXMLLoader.load(getClass().getResource("Configurations.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
 
 
 
