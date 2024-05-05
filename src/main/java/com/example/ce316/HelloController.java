@@ -36,6 +36,8 @@ public class HelloController {
     @FXML
     private Button BackButton;
 
+    CreateNewProject projectCreater;
+
 
     @FXML
     private URL location;
@@ -121,6 +123,12 @@ public class HelloController {
         stage.show();
 
     }
+
+    public void handleCreateProjectButtonAction(ActionEvent event){
+        projectCreater = new CreateNewProject();
+        projectCreater.createProjectFile();
+    }
+
 
 
 
