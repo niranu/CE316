@@ -1,0 +1,5 @@
+{
+  "needs_compilation": true,
+  "command": "gcc {source} -o {executable}",
+  "run_command": "{executable}"
+}

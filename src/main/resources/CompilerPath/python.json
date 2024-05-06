@@ -1,0 +1,4 @@
+{
+  "needs_compilation": false,
+  "command": "python {source}"
+}
