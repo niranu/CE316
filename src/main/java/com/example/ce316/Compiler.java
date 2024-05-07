@@ -1,16 +1,12 @@
 package com.example.ce316;
 
-
-//COMPILE RUN JAVA İÇİN ÇALIŞIYOR GİBİ AMA OUTPUT ALAMIYORUZ BELKİ DE ÇALIŞMIYORDUR
 import java.io.*;
-
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public class Compiler {
-    private static final String COMPILER_PATH = ".//src//main//resources//CompilerPath";
+    private static final String COMPILER_PATH = "src/main/resources/CompilerPath/";
 
-    // Compiles and runs the source code based on the provided configuration
     public static void compileAndRun(String language, String sourceCodePath) {
         try {
             JSONObject config = getConfigurationByLanguage(language);
@@ -19,30 +15,31 @@ public class Compiler {
                 return;
             }
 
-            String compilerCommand = config.getString("command");
-
-            // Compiling the source code (if necessary)
+            // Compiles the source code
             if (config.getBoolean("needs_compilation")) {
-                String compileCommand = compilerCommand.replace("{source}", sourceCodePath);
+                String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
                 System.out.println("Compiling with command: " + compileCommand);
                 Process compileProcess = Runtime.getRuntime().exec(compileCommand);
                 compileProcess.waitFor();
+                printProcessOutput(compileProcess);
             }
 
-            // Running the compiled code or script
-            String runCommand = config.has("run_command") ? config.getString("run_command") : compilerCommand;
-            runCommand = runCommand.replace("{classpath}", ".//src//main//resources//Projects")
-                    .replace("{main}", "Main"); // Changed from "main" to "Main"
+            // Runs the compiled code
+            String runCommand = config.getString("run_command").replace("{classpath}", "src/main/resources/Projects");
             System.out.println("Running code from: " + runCommand);
             Process runProcess = Runtime.getRuntime().exec(runCommand);
-            captureOutput(runProcess);
+            printProcessOutput(runProcess);
+
+            // Delete the .class file after execution
+            deleteClassFiles(sourceCodePath);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    // Retrieves the configuration JSON object based on language
+
     private static JSONObject getConfigurationByLanguage(String language) {
-        File configFile = new File(COMPILER_PATH, language + ".json");
+        File configFile = new File(COMPILER_PATH + language + ".json");
         if (configFile.exists()) {
             try (InputStream is = new FileInputStream(configFile)) {
                 JSONTokener tokener = new JSONTokener(is);
@@ -54,23 +51,34 @@ public class Compiler {
         return null;
     }
 
-    // Captures and prints the output of the process (ÇALIŞMIYOR DÜZELTİLECEK)
-    private static void captureOutput(Process process) throws IOException {
+    private static void printProcessOutput(Process process) throws IOException {
+        BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
         BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
         String line;
-        while ((line = reader.readLine()) != null) {
+        System.out.println("Standard output:");
+        while ((line = stdInput.readLine()) != null) {
             System.out.println(line);
         }
+
         System.out.println("Standard error:");
         while ((line = stdError.readLine()) != null) {
             System.out.println(line);
         }
     }
 
-    public static void main(String[] args) {
-        // Example usage: run a Python script
-        compileAndRun("java", "src/main/resources/Projects/test.java");
+    // Method to delete .class files
+    private static void deleteClassFiles(String sourceCodePath) {
+        String classFilePath = sourceCodePath.replace(".java", ".class");
+        File classFile = new File(classFilePath);
+        if (classFile.delete()) {
+            System.out.println("Deleted class file: " + classFilePath);
+        } else {
+            System.out.println("Failed to delete class file: " + classFilePath);
+        }
+    }
 
+    public static void main(String[] args) {
+        compileAndRun("java", "src/main/resources/Projects/HelloWorld.java");
     }
 }
