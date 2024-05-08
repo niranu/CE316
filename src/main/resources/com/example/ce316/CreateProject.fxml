@@ -13,7 +13,7 @@
     <children>
         <Label style="-fx-text-fill: white; -fx-font-size: 24px;" text="Create New Project" />
       <TextArea fx:id="createNewProject_ProjectName" prefHeight="58.0" prefWidth="618.0" promptText="Project Name" />
-        <ComboBox fx:id="languageComboBox" promptText="Select Configration" style="-fx-background-color: #FFA258;">
+        <ComboBox fx:id="createNewProject_ConfigurationComboBox" promptText="Select Configration" style="-fx-background-color: #FFA258;">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Java" />

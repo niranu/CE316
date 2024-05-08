@@ -45,6 +45,8 @@ public class HelloController {
     private TextArea createNewProject_ExpectedOutput;
     @FXML
     private Button createNewProject_CreateProject;
+    @FXML
+    private ComboBox<String> createNewProject_ConfigurationComboBox;
 
     CreateNewProject projectCreater;
 
@@ -62,6 +64,13 @@ public class HelloController {
         String projectName = createNewProject_ProjectName.getText();
         String description = createNewProject_ProjectDescription.getText();
         String expectedOutput = createNewProject_ExpectedOutput.getText();
+
+        String selectedItem = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            System.out.println("Selected item: " + selectedItem);
+        } else {
+            System.out.println("No item selected.");
+        }
 
         projectCreater.createProjectFile(projectName, description, expectedOutput);
 
