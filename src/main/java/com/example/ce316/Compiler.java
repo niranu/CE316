@@ -79,6 +79,6 @@ public class Compiler {
     }
 
     public static void main(String[] args) {
-        compileAndRun("java", "src/main/resources/Projects/HelloWorld.java");
+        compileAndRun("java", "src/main/resources/Projects/Main.java");
     }
 }
