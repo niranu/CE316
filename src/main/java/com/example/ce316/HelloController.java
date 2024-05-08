@@ -36,6 +36,16 @@ public class HelloController {
     @FXML
     private Button BackButton;
 
+
+    @FXML
+    private TextArea createNewProject_ProjectName;
+    @FXML
+    private TextArea createNewProject_ProjectDescription;
+    @FXML
+    private TextArea createNewProject_ExpectedOutput;
+    @FXML
+    private Button createNewProject_CreateProject;
+
     CreateNewProject projectCreater;
 
 
@@ -48,6 +58,13 @@ public class HelloController {
     private void createProject(ActionEvent event) {
         // Code to handle creating a project
         System.out.println("Project creation initiated.");
+        projectCreater = new CreateNewProject();
+        String projectName = createNewProject_ProjectName.getText();
+        String description = createNewProject_ProjectDescription.getText();
+        String expectedOutput = createNewProject_ExpectedOutput.getText();
+
+        projectCreater.createProjectFile(projectName, description, expectedOutput);
+
     }
 
     @FXML
@@ -124,10 +141,10 @@ public class HelloController {
 
     }
 
-    public void handleCreateProjectButtonAction(ActionEvent event){
+    /*public void handleCreateProjectButtonAction(ActionEvent event){
         projectCreater = new CreateNewProject();
         projectCreater.createProjectFile();
-    }
+    }*/
 
 
 
