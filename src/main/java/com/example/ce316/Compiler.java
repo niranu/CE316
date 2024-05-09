@@ -44,8 +44,8 @@ public class Compiler {
             e.printStackTrace();
         }
     }*/
-    public static void compileAndRun(String project/*String fileName*/) {
-        String sourceCodePath = PROJECT_PATH + project+"/StudentProjects";
+    public static void compileAndRun(String project ,String fileName) {
+        String sourceCodePath = PROJECT_PATH + project+"/StudentProjects/";
         //src/main/resources/Projects/Library/StudentProjects/456/Main
         try {
             JSONObject config = getConfigurationByProject(project);
@@ -57,7 +57,7 @@ public class Compiler {
             // Compiles the source code
             if (config.getBoolean("needs_compilation")) {
 
-                String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
+                String compileCommand = config.getString("command").replace("{source}", sourceCodePath+"*");
                 System.out.println("Compiling with command: " + compileCommand);
                 Process compileProcess = Runtime.getRuntime().exec(compileCommand);
                 compileProcess.waitFor();
@@ -66,7 +66,7 @@ public class Compiler {
 
             // Runs the compiled code
             //src/main/resources/Projects/Library/StudentProjects/Main
-            String runCommand = config.getString("run_command").replace("{classpath}",sourceCodePath+"/");
+            String runCommand = config.getString("run_command").replace("{classpath}",sourceCodePath);
             System.out.println("Running code from: " + runCommand);
             Process runProcess = Runtime.getRuntime().exec(runCommand);
             printProcessOutput(runProcess);
@@ -152,15 +152,15 @@ public class Compiler {
             assert studentDirectories != null;
             for (File studentDirectory : studentDirectories) {
                 System.out.println("Running code for student: " + studentDirectory.getName());
-                //compileAndRun(project, studentDirectory.getName()); // Pass the project name and student directory name
+                compileAndRun(project, studentDirectory.getName()); // Pass the project name and student directory name
                 System.out.println("Finished running code for student: " + studentDirectory.getName());
             }
 
         }
 
         public static void main (String[] args){
-            compileAndRun("Library");
-            //RunAll("Library");
+            //compileAndRun("Library","456");
+            RunAll("Library");
         }
 
 
