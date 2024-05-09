@@ -9,41 +9,6 @@ import org.json.JSONTokener;
 public class Compiler {
     private static final String PROJECT_PATH = "src/main/resources/Projects/";
 
-    /*public static void compileAndRun(String project, String studentDirectory) {
-        String sourceCodePath = PROJECT_PATH + project + "/StudentProjects/" + studentDirectory;
-        //src/main/resources/Projects/Library/StudentProjects                     /123
-
-        try {
-            JSONObject config = getConfigurationByProject(project);
-            if (config == null) {
-                System.out.println("No configuration found for the specified language.");
-                return;
-            }
-
-            // Compiles the source code
-            if (config.getBoolean("needs_compilation")) {
-
-                String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
-                System.out.println("Compiling with command: " + compileCommand);
-                Process compileProcess = Runtime.getRuntime().exec(compileCommand);
-                compileProcess.waitFor();
-                System.out.println("******");
-            }
-
-            // Runs the compiled code
-            //src/main/resources/Projects/Library/StudentProjects/123/Main
-            String runCommand = config.getString("run_command").replace("{classpath}", sourceCodePath+"/");
-            System.out.println("Running code from: " + runCommand);
-            Process runProcess = Runtime.getRuntime().exec(runCommand);
-            printProcessOutput(runProcess);
-
-            // Delete the .class file after execution
-            deleteClassFiles(sourceCodePath);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
     public static void compileAndRun(String project ,String fileName) {
         String sourceCodePath = PROJECT_PATH + project+"/StudentProjects/";
         //src/main/resources/Projects/Library/StudentProjects/456/Main
@@ -127,11 +92,27 @@ public class Compiler {
                 System.out.println("Class file does not exist: " + classFilePath);
             }
         }
-        private static String Comparator (String project, String studentOutput){
+        // compares the expected output to student output
+    private static boolean Comparator (String project,String studentFile) throws IOException {
+        String sourceCodePath = PROJECT_PATH + project+"/"+project+"_output.txt";
+        String studentOutputPath = PROJECT_PATH + project+"/StudentProjects/"+studentFile+"/output.txt";
 
+        BufferedReader sourceReader = new BufferedReader(new FileReader(sourceCodePath));
+        BufferedReader outputReader = new BufferedReader(new FileReader(studentOutputPath));
+        String sourceLine;
+        String outputLine;
 
-            return null;
+        // Compare each line from both files
+        while ((sourceLine = sourceReader.readLine()) != null && (outputLine = outputReader.readLine()) != null) {
+
+            if (!sourceLine.equals(outputLine)) {
+                return false;
+            }
+
         }
+
+        return true;
+    }
 
         //For running all the code in the Students project File which are divided by the students ID
         // and all are separated in different directories
@@ -158,9 +139,10 @@ public class Compiler {
 
         }
 
-        public static void main (String[] args){
-            compileAndRun("Library","456");
-            RunAll("Library");
+        public static void main (String[] args) throws IOException {
+            //compileAndRun("Library","456");
+            //RunAll("Library");
+            System.out.println(Comparator("Library","456"));
         }
 
 
