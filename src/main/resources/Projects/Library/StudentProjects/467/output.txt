@@ -1,0 +1,4 @@
+Standard output:
+Hello, World!
+
+Standard error:
