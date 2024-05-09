@@ -113,6 +113,23 @@ public class Compiler {
 
         return true;
     }
+    public static void writeCSV(String project, String studentID, boolean match) {
+
+        String CSVPath = PROJECT_PATH + project;
+        String csvFile = CSVPath +"/comparison_report.csv";
+
+        try (FileWriter writer = new FileWriter(csvFile, true)) {
+            // Append project, student ID, and match status to CSV file
+            writer.append(project)
+                    .append(",")
+                    .append(studentID)
+                    .append(",")
+                    .append(match ? "Match with output" : "Does not match with output")
+                    .append("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
         //For running all the code in the Students project File which are divided by the students ID
         // and all are separated in different directories
@@ -143,6 +160,7 @@ public class Compiler {
             //compileAndRun("Library","456");
             //RunAll("Library");
             System.out.println(Comparator("Library","456"));
+            writeCSV("Library","456",true);
         }
 
 
