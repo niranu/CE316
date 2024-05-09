@@ -57,7 +57,7 @@ public class Compiler {
             // Compiles the source code
             if (config.getBoolean("needs_compilation")) {
 
-                String compileCommand = config.getString("command").replace("{source}", sourceCodePath+"*");
+                String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
                 System.out.println("Compiling with command: " + compileCommand);
                 Process compileProcess = Runtime.getRuntime().exec(compileCommand);
                 compileProcess.waitFor();
@@ -127,7 +127,7 @@ public class Compiler {
                 System.out.println("Class file does not exist: " + classFilePath);
             }
         }
-        private static String Comparator () {
+        private static String Comparator (String project, String studentOutput){
 
 
             return null;
@@ -159,9 +159,9 @@ public class Compiler {
         }
 
         public static void main (String[] args){
-            //compileAndRun("Library","456");
+            compileAndRun("Library","456");
             RunAll("Library");
         }
 
 
-}
+    }
