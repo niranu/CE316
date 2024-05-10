@@ -60,7 +60,7 @@
       <VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: #4A3A7C;">
          <children>
             <Label alignment="BOTTOM_CENTER" text="Project" textFill="WHITE" />
-            <ComboBox prefHeight="25.0" prefWidth="252.0" promptText="Choose project" style="-fx-background-color: #FFA258;" />
+            <ComboBox fx:id="project_comboBox" onAction="#projectComboBox" prefHeight="25.0" prefWidth="252.0" promptText="Choose project" style="-fx-background-color: #FFA258;" />
             <TableView prefHeight="244.0" prefWidth="557.0" VBox.vgrow="ALWAYS">
               <columns>
                   <TableColumn prefWidth="75.0" text="No" />
@@ -85,7 +85,7 @@
          <children>
             <Button mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Upload Zips" />
             <Button mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Delete Zips" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #FFA258;" text="Run" />
+            <Button fx:id="RunButton" mnemonicParsing="false" onAction="#RunAllStudentFiles" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #FFA258;" text="Run" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #FFA258;" text="Extract Report" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setBackButton" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #FFA258;" text="Back" />
          </children>

@@ -2,11 +2,12 @@ package com.example.ce316;
 
 import java.io.*;
 import java.util.Locale;
-
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public class Compiler {
+    public Compiler() {}
+
     private static final String PROJECT_PATH = "src/main/resources/Projects/";
 
     public static void compileAndRun(String project ,String fileName) {
@@ -146,7 +147,7 @@ public class Compiler {
 
     //For running all the code in the Students project File which are divided by the students ID
     // and all are separated in different directories
-    private static void RunAll (String project){
+    public void RunAll (String project){
         String studentProjectPath = PROJECT_PATH + "/" + project + "/StudentProjects";
         File studentProjectsDirectory = new File(studentProjectPath);
 
@@ -169,12 +170,12 @@ public class Compiler {
 
     }
 
-    public static void main (String[] args) throws IOException {
+   /* public static void main (String[] args) throws IOException {
         //compileAndRun("Library","456");
         RunAll("Library");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
-    }
+    }*/
 
 
 }

@@ -1,25 +1,22 @@
 package com.example.ce316;
 
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class HelloController {
@@ -35,6 +32,8 @@ public class HelloController {
     private Button assignmentReportsButton;
     @FXML
     private Button BackButton;
+    @FXML
+    private Button RunButton;
 
     @FXML
     private TextArea createNewProject_ProjectName;
@@ -46,8 +45,10 @@ public class HelloController {
     private Button createNewProject_CreateProject;
     @FXML
     private ComboBox<String> createNewProject_ConfigurationComboBox;
+    @FXML
+    private ComboBox<String> project_comboBox = new ComboBox<>();;
 
-    CreateNewProject projectCreater;
+    CreateNewProject projectCreator;
 
 
     @FXML
@@ -59,7 +60,7 @@ public class HelloController {
     private void createProject(ActionEvent event) {
         // Code to handle creating a project
         System.out.println("Project creation initiated.");
-        projectCreater = new CreateNewProject();
+        projectCreator = new CreateNewProject();
         String projectName = createNewProject_ProjectName.getText();
         String description = createNewProject_ProjectDescription.getText();
         String expectedOutput = createNewProject_ExpectedOutput.getText();
@@ -71,7 +72,7 @@ public class HelloController {
             System.out.println("No item selected.");
         }
 
-        projectCreater.createProjectFile(projectName, description, expectedOutput);
+        projectCreator.createProjectFile(projectName, description, expectedOutput);
 
     }
 
@@ -84,14 +85,37 @@ public class HelloController {
 
     @FXML
     void initialize() {
+        project_comboBox.setOnShowing(event -> projectComboBox());
 
     }
+    //Run button action for Uploaded Student Files
+    Compiler compiler = new Compiler();
+    @FXML
+    private void RunAllStudentFiles(ActionEvent e)throws IOException{
+        String project = project_comboBox.getSelectionModel().getSelectedItem();
+        compiler.RunAll(project);
+    }
+
+    @FXML
+    private void projectComboBox(){
+        String projectsPath = "src/main/resources/Projects";
+        File ProjectsDirectory = new File(projectsPath);
+        File[] projectDirectories = ProjectsDirectory.listFiles(File::isDirectory);
+        ObservableList<String> list= FXCollections.observableArrayList();
+        assert projectDirectories != null;
+        for(File projectDirectory : projectDirectories) {
+            list.add(projectDirectory.getName());
+        }
+        project_comboBox.setItems(list);
+    }
+
+
+
+
+
 
     //Scene Changing when clicked on tha main window
-
-
-
-   private Stage stage;
+    private Stage stage;
     private Scene scene;
     @FXML
     private Parent root;
