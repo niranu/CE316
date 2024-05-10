@@ -36,7 +36,6 @@ public class HelloController {
     @FXML
     private Button BackButton;
 
-
     @FXML
     private TextArea createNewProject_ProjectName;
     @FXML

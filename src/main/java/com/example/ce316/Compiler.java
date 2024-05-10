@@ -34,7 +34,9 @@ public class Compiler {
             String runCommand = config.getString("run_command").replace("{classpath}",sourceCodePath);
             System.out.println("Running code from: " + runCommand);
             Process runProcess = Runtime.getRuntime().exec(runCommand);
-            printProcessOutput(runProcess,sourceCodePath);
+            saveProcessOutput(runProcess,sourceCodePath);
+            boolean match = Comparator(project,fileName);
+            writeCSV(project,fileName,match);
 
             // Delete the .class file after execution
             deleteClassFiles(sourceCodePath);
@@ -58,7 +60,7 @@ public class Compiler {
         return null;
     }
 
-    private static void printProcessOutput(Process process, String studentProjectPath) throws IOException {
+    private static void saveProcessOutput(Process process, String studentProjectPath) throws IOException {
         BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
         BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
@@ -66,24 +68,21 @@ public class Compiler {
         StringBuilder errors = new StringBuilder();
 
         String line;
-        System.out.println("Standard output:");
+
         while ((line = stdInput.readLine()) != null) {
-            System.out.println(line);
             output.append(line).append(System.lineSeparator());
         }
 
-        System.out.println("Standard error:");
+
         while ((line = stdError.readLine()) != null) {
-            System.out.println(line);
             errors.append(line).append(System.lineSeparator());
         }
 
         // Write the output to the output.txt file
         File outputFile = new File(studentProjectPath, "output.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-            writer.write("Standard output:\n");
             writer.write(output.toString());
-            writer.write("\nStandard error:\n");
+
             writer.write(errors.toString());
         }
     }
@@ -171,10 +170,10 @@ public class Compiler {
     }
 
     public static void main (String[] args) throws IOException {
-        compileAndRun("Library","467");
-        //RunAll("Library");
-        System.out.println(Comparator("Library","456"));
-        writeCSV("Library","456",true);
+        //compileAndRun("Library","456");
+        RunAll("Library");
+        //System.out.println(Comparator("Library","456"));
+        //writeCSV("Library","456",true);
     }
 
 

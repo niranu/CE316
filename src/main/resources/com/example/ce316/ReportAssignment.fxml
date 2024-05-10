@@ -21,9 +21,9 @@
             <ComboBox prefHeight="37.0" prefWidth="335.0" promptText="Projects" />
               <TableView fx:id="reportsTable" prefHeight="224.0" prefWidth="699.0">
                   <columns>
-                      <TableColumn prefWidth="150.0" text="Student Name">
+                      <TableColumn prefWidth="150.0" text="Student ID">
                           <cellValueFactory>
-                        <PropertyValueFactory property="studentName" />
+                        <PropertyValueFactory property="studentID" />
                      </cellValueFactory>
                       </TableColumn>
                       <TableColumn prefWidth="150.0" text="Project">
@@ -31,14 +31,9 @@
                         <PropertyValueFactory property="projectName" />
                      </cellValueFactory>
                       </TableColumn>
-                      <TableColumn prefWidth="100.0" text="Score">
+                      <TableColumn prefWidth="200.0" text="Result">
                           <cellValueFactory>
-                        <PropertyValueFactory property="score" />
-                     </cellValueFactory>
-                      </TableColumn>
-                      <TableColumn prefWidth="200.0" text="Status">
-                          <cellValueFactory>
-                        <PropertyValueFactory property="status" />
+                        <PropertyValueFactory property="result" />
                      </cellValueFactory>
                       </TableColumn>
                   </columns>
