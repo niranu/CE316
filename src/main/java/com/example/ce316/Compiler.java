@@ -10,6 +10,7 @@ public class Compiler {
 
     private static final String PROJECT_PATH = "src/main/resources/Projects/";
 
+
     public static void compileAndRun(String project ,String fileName) {
         String sourceCodePath = PROJECT_PATH + project+"/StudentProjects/"+fileName+"/";
         //src/main/resources/Projects/Library/StudentProjects/456/Main
@@ -29,18 +30,28 @@ public class Compiler {
                 compileProcess.waitFor();
                 System.out.println("******");
             }
+            String language = config.getString("language");
 
             // Runs the compiled code
             //src/main/resources/Projects/Library/StudentProjects/Main
+            if(language.equals("java")){
             String runCommand = config.getString("run_command").replace("{classpath}",sourceCodePath);
             System.out.println("Running code from: " + runCommand);
             Process runProcess = Runtime.getRuntime().exec(runCommand);
             saveProcessOutput(runProcess,sourceCodePath);
             boolean match = Comparator(project,fileName);
-            writeCSV(project,fileName,match);
+            writeCSV(project,fileName,match);}
+            if(language.equals("c")  || language.equals("c++")){
+                String runCommand = config.getString("run_command").replace("{source}",sourceCodePath);
+                System.out.println("Running C code with command: " + runCommand);
+                Process runProcess = Runtime.getRuntime().exec(runCommand);
+                saveProcessOutput(runProcess, sourceCodePath);
+                boolean match = Comparator(project, fileName);
+                writeCSV(project, fileName, match);
 
-            // Delete the .class file after execution
-            deleteClassFiles(sourceCodePath);
+            }
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -171,8 +182,10 @@ public class Compiler {
     }
 
     public static void main (String[] args) throws IOException {
+        //Compiler cm = new Compiler();
+        //compileAndRun("Library","456");
         compileAndRun("HelloWorld","510");
-        //RunAll("Library");
+        //cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
     }

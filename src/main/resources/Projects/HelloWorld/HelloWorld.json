@@ -1,5 +1,6 @@
 {
+  "language" :"c",
   "needs_compilation": true,
   "command": "gcc {source} -o HelloWorld.c",
-  "run_command": "./HelloWorld"
+  "run_command": "{source}.\\a.exe"
 }
