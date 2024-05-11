@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #3A2C63;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #3A2C63;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
     <children>
         <MenuBar style="-fx-background-color: #FFA258;">
             <menus>
@@ -60,11 +60,11 @@
                 </TextFlow>
                 <VBox alignment="CENTER" minWidth="300.0" prefHeight="375.0" prefWidth="379.0" spacing="20" style="-fx-background-color: #4A3A7C;">
                     <children>
-                        <Button fx:id="createNewProjectButton" mnemonicParsing="false" onAction="#setCreateNewProjectButton" prefWidth="200.0" text="Create New Project" />
-                        <Button fx:id="openExistingProjectButton" mnemonicParsing="false" onAction="#setOpenExistingProjectButton" prefWidth="200.0" text="Open Existing Project" />
-                  <Button mnemonicParsing="false" onAction="#setUploadStudentButton" prefHeight="25.0" prefWidth="200.0" text="Upload student files" />
-                        <Button fx:id="assignmentReportsButton" mnemonicParsing="false" onAction="#setAssignmentReportsButton" prefHeight="25.0" prefWidth="200.0" text="Assignment Reports" />
-                  <Button mnemonicParsing="false" onAction="#setConfigurations" prefHeight="25.0" prefWidth="200.0" text="Configurations" />
+                        <Button fx:id="createNewProjectButton" mnemonicParsing="false" onAction="#setCreateNewProjectButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Create New Project" />
+                        <Button fx:id="openExistingProjectButton" mnemonicParsing="false" onAction="#setOpenExistingProjectButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Edit Project" />
+                  <Button mnemonicParsing="false" onAction="#setUploadStudentButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Run Students' Files" />
+                        <Button fx:id="assignmentReportsButton" mnemonicParsing="false" onAction="#setAssignmentReportsButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Project Reports" />
+                  <Button mnemonicParsing="false" onAction="#setConfigurations" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Configurations" />
                     </children>
                 </VBox>
             </items>

@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="392.0" prefWidth="589.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
    <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0">
          <children>
             <Label text="Configurations" textFill="WHITE">
                <HBox.margin>
@@ -28,7 +28,7 @@
       </HBox>
       <HBox maxHeight="70.0" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="25.0" prefWidth="172.0" text="Language Name:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="28.0" prefWidth="164.0" text="Language Name:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="7.0" />
                </HBox.margin>
@@ -36,7 +36,7 @@
                   <Insets top="8.0" />
                </padding>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="461.0" promptText="Java, C, Python..." HBox.hgrow="ALWAYS">
+            <TextField prefHeight="26.0" prefWidth="501.0" promptText="Java, C, Python..." HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -48,7 +48,7 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="10.0" maxHeight="70.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="25.0" prefWidth="175.0" text="Compiler/Interpreter Path:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="26.0" prefWidth="178.0" text="Compiler/Interpreter Path:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="7.0" />
                </HBox.margin>
@@ -56,7 +56,7 @@
                   <Insets top="8.0" />
                </padding>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="461.0" HBox.hgrow="ALWAYS">
+            <TextField prefHeight="26.0" prefWidth="518.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -68,7 +68,7 @@
       </HBox>
       <HBox prefHeight="59.0" prefWidth="589.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="27.0" prefWidth="169.0" text="Interpret / Compile:" textFill="WHITE">
+            <Label prefHeight="28.0" prefWidth="164.0" text="Interpret / Compile:" textFill="WHITE">
                <padding>
                   <Insets left="7.0" top="10.0" />
                </padding>
@@ -76,27 +76,30 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <ComboBox prefHeight="25.0" prefWidth="237.0" style="-fx-background-color: #FFA258;">
+            <ComboBox prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #FFA258;">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Interpreter" />
                         <String fx:value="Compiler" />
                     </FXCollections>
                 </items>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
             </ComboBox>
          </children>
          <padding>
             <Insets top="5.0" />
          </padding>
       </HBox>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="526.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="27.0" prefWidth="153.0" text="Compilation Options:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="28.0" prefWidth="164.0" text="Compilation Options:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets left="7.0" top="10.0" />
                </padding>
             </Label>
-            <TextArea prefHeight="79.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
+            <TextArea prefHeight="57.0" prefWidth="492.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -108,7 +111,7 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="302.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="27.0" prefWidth="155.0" text="File Type:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="28.0" prefWidth="164.0" text="File Type:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets left="7.0" top="10.0" />
                </padding>
@@ -125,7 +128,7 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="27.0" prefWidth="156.0" text="Dependencies:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="28.0" prefWidth="164.0" text="Dependencies:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets left="7.0" top="10.0" />
                </padding>
@@ -140,7 +143,7 @@
             <Insets bottom="5.0" top="5.0" />
          </padding>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="ALWAYS">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="ALWAYS">
          <children>
             <Button mnemonicParsing="false" onAction="#setBackButton" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #FFA258;" text="Back" HBox.hgrow="ALWAYS">
                <HBox.margin>

@@ -9,36 +9,33 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="574.0" prefWidth="658.0" spacing="20" style="-fx-background-color: #4A3A7C; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="700.0" spacing="20" style="-fx-background-color: #4A3A7C; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
     <children>
         <Label style="-fx-text-fill: white; -fx-font-size: 24px;" text="Create New Project" />
-      <TextArea fx:id="createNewProject_ProjectName" prefHeight="58.0" prefWidth="618.0" promptText="Project Name (It should be unique)" />
-        <ComboBox fx:id="createNewProject_ConfigurationComboBox" promptText="Select Configration" style="-fx-background-color: #FFA258;">
+      <TextArea fx:id="createNewProject_ProjectName" prefHeight="5.0" prefWidth="618.0" promptText="Project Name (It should be unique)" />
+        <ComboBox fx:id="createNewProject_ConfigurationComboBox" prefHeight="26.0" prefWidth="614.0" promptText="Select Configration" style="-fx-background-color: #FFA258;">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Java" />
-                    <String fx:value="C++" />
-                    <String fx:value="Python" />
                 </FXCollections>
             </items>
         </ComboBox>
       <TextArea fx:id="createNewProject_ProjectDescription" prefHeight="139.0" prefWidth="618.0" promptText="Project Description (optional)" />
-      <TextArea fx:id="createNewProject_ExpectedOutput" prefHeight="90.0" prefWidth="618.0" promptText="Expected Output (It Can Be Directly Written or You Can Choose a Code)" />
+      <TextArea fx:id="createNewProject_ExpectedOutput" prefHeight="102.0" prefWidth="618.0" promptText="Expected Output (It Can Be Directly Written or You Can Choose a Code)" />
       <HBox prefHeight="54.0" prefWidth="618.0">
          <children>
-            <Button mnemonicParsing="false" text="Upload Code" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #FFA258;" text="Upload Code" />
          </children>
       </HBox>
       <HBox prefHeight="42.0" prefWidth="618.0">
          <children>
-            <TextArea fx:id="mainClassNameTextArea" prefHeight="40.0" prefWidth="623.0" promptText="Main class name (Assumed to be main or Main if not entered)" HBox.hgrow="ALWAYS" />
+            <TextArea fx:id="mainClassNameTextArea" prefHeight="57.0" prefWidth="618.0" promptText="Main class name (Assumed to be main or Main if not entered)" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <HBox prefHeight="30.0" prefWidth="618.0" spacing="150.0">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="379.0" spacing="60.0">
          <children>
+              <Button onAction="#setBackButton" prefHeight="26.0" prefWidth="81.0" style="-fx-background-color: #FFA258; -fx-text-fill: black;" text="Back" />
+              <Button onAction="#cancel" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #FFA258; -fx-text-fill: black;" text="Cancel" />
               <Button fx:id="createNewProject_CreateProject" alignment="CENTER" onAction="#createProject" style="-fx-background-color: #FFA258; -fx-text-fill: black;" text="Create Project" />
-              <Button onAction="#cancel" style="-fx-background-color: #FFA258; -fx-text-fill: black;" text="Cancel" />
-              <Button onAction="#setBackButton" style="-fx-background-color: #FFA258; -fx-text-fill: black;" text="Back to Main Menu" />
          </children>
       </HBox>
     </children>

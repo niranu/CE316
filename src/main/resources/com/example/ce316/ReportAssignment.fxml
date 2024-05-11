@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="495.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
    <center>
       <VBox fx:id="root" alignment="CENTER" prefWidth="640.0" spacing="20" style="-fx-background-color: #4A3A7C; -fx-padding: 20;">
           <children>
               <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" style="-fx-text-fill: white; -fx-font-size: 24px;" text="Assignment Reports" />
-            <ComboBox fx:id="project_comboBox" prefHeight="37.0" prefWidth="335.0" promptText="Projects" />
+            <ComboBox fx:id="project_comboBox" prefHeight="31.0" prefWidth="332.0" promptText="Projects" style="-fx-background-color: #FFA258;" />
               <TableView fx:id="reportTable" prefHeight="224.0" prefWidth="699.0">
                   <columns>
                       <TableColumn fx:id="projectColumn" prefWidth="150.0" text="Project">
@@ -41,10 +41,10 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
               </TableView>
-              <HBox spacing="10">
-                  <Button text="Export Report" />
-                  <Button fx:id="refreshButton" onAction="#refresh" text="Refresh" />
-               <Button fx:id="BackButton" mnemonicParsing="false" onAction="#setBackButton" text="Back" />
+              <HBox alignment="TOP_CENTER" spacing="60.0">
+                  <Button prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #FFA258;" text="Export Report" />
+                  <Button fx:id="refreshButton" onAction="#refresh" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #FFA258;" text="Refresh" />
+               <Button fx:id="BackButton" mnemonicParsing="false" onAction="#setBackButton" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #FFA258;" text="Back" />
               </HBox>
           </children>
       </VBox>

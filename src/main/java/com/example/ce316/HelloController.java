@@ -57,10 +57,9 @@ public class HelloController {
     @FXML
     private Button refreshButton;
     @FXML
-    private ComboBox<String> createNewProject_ConfigurationComboBox;
+    private ComboBox<String> createNewProject_ConfigurationComboBox= new ComboBox<>();
     @FXML
     private ComboBox<String> project_comboBox = new ComboBox<>();
-    ;
 
     CreateNewProject projectCreator;
 
@@ -190,6 +189,8 @@ public class HelloController {
     @FXML
     void initialize() {
         project_comboBox.setOnShowing(event -> projectComboBox());
+        createNewProject_ConfigurationComboBox.setOnShowing(event -> ConfigComboBox());
+
 
 
     }
@@ -214,6 +215,21 @@ public class HelloController {
             list.add(projectDirectory.getName());
         }
         project_comboBox.setItems(list);
+    }
+    private void ConfigComboBox() {
+        String JsonsPath = "src/main/resources/Jsons";
+        File JsonsDirectory = new File(JsonsPath);
+        File[] jsonDirectories = JsonsDirectory.listFiles(File::isFile);
+        ObservableList<String> list = FXCollections.observableArrayList();
+        assert jsonDirectories != null;
+        for (File file : jsonDirectories) {
+            if (file.isFile() && file.getName().toLowerCase().endsWith(".json")) {
+                String fileName = file.getName();
+                // Remove the ".json" extension and add the name to the list
+                list.add(fileName.substring(0, fileName.lastIndexOf('.')));
+            }
+        }
+        createNewProject_ConfigurationComboBox.setItems(list);
     }
 
 
