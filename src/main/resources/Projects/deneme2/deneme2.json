@@ -1,0 +1,6 @@
+{
+  "language" :"c",
+  "needs_compilation": true,
+  "command": "gcc {source} -o {executableName}",
+  "run_command": ".\\{executableName}.exe"
+}

@@ -138,9 +138,47 @@ public class HelloController {
                         System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                     }
                 }
+                else if(selectedItemLowerCase.trim().equals("c")) {
+                    System.out.println("Selected language is C.");
+
+                    try {
+                        // Read the C JSON template file
+                        String cJsonFilePath = "src/main/resources/Jsons/c.json";
+                        File cJsonFile = new File(cJsonFilePath);
+
+                        if (cJsonFile.exists()) {
+                            String jsonContent = new String(Files.readAllBytes(cJsonFile.toPath()));
+
+                            // Customize JSON content for C language
+                            jsonContent = jsonContent.replace("{main}", mainClassName);
+
+                            // Save the edited JSON content to the project directory
+                            String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+                            File projectDirectory = new File(projectDirectoryPath);
+
+                            if (!projectDirectory.exists()) {
+                                if (projectDirectory.mkdirs()) {
+                                    System.out.println("Project directory created successfully.");
+                                } else {
+                                    System.out.println("Failed to create project directory.");
+                                    return;
+                                }
+                            }
+
+                            // Save the edited JSON content to the project directory with the project name as the filename
+                            Files.write(Paths.get(projectDirectoryPath + "/" + projectName + ".json"), jsonContent.getBytes());
+                            System.out.println("Edited JSON file saved to project directory successfully.");
+                        } else {
+                            System.out.println("C JSON file not found.");
+                        }
+                    } catch (IOException e) {
+                        System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
+                    }
+                }
+
                 else if(selectedItemLowerCase.trim().equals("c++")){}
                 else if(selectedItemLowerCase.trim().equals("python")){}
-                else if(selectedItemLowerCase.trim().equals("c")){}
+
 
 
 
