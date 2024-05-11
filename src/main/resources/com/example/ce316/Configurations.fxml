@@ -28,7 +28,7 @@
       </HBox>
       <HBox maxHeight="70.0" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="28.0" prefWidth="164.0" text="Language Name:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="26.0" prefWidth="157.0" text="Language Name:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="7.0" />
                </HBox.margin>
@@ -36,7 +36,7 @@
                   <Insets top="8.0" />
                </padding>
             </Label>
-            <TextField prefHeight="26.0" prefWidth="501.0" promptText="Java, C, Python..." HBox.hgrow="ALWAYS">
+            <TextField prefHeight="26.0" prefWidth="536.0" promptText="Java, C, Python..." HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -48,7 +48,7 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="10.0" maxHeight="70.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="26.0" prefWidth="178.0" text="Compiler/Interpreter Path:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="26.0" prefWidth="156.0" text="Compiler/Interpreter Path:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="7.0" />
                </HBox.margin>
@@ -56,7 +56,7 @@
                   <Insets top="8.0" />
                </padding>
             </Label>
-            <TextField prefHeight="26.0" prefWidth="518.0" HBox.hgrow="ALWAYS">
+            <TextField prefHeight="26.0" prefWidth="526.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -76,7 +76,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <ComboBox prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #FFA258;">
+            <ComboBox prefHeight="26.0" prefWidth="229.0" style="-fx-background-color: #FFA258;">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Interpreter" />

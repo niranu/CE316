@@ -189,10 +189,10 @@ public class Compiler {
     }
 
     public static void main (String[] args) throws IOException {
-        //Compiler cm = new Compiler();
+        Compiler cm = new Compiler();
         //compileAndRun("Library","456");
-        compileAndRun("HelloWorld","551");
-        //cm.RunAll("HelloWorld");
+
+        cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
     }
