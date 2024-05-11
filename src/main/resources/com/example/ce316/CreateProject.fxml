@@ -29,6 +29,11 @@
             <Button mnemonicParsing="false" text="Upload Code" />
          </children>
       </HBox>
+      <HBox prefHeight="42.0" prefWidth="618.0">
+         <children>
+            <TextArea fx:id="mainClassNameTextArea" prefHeight="40.0" prefWidth="623.0" promptText="Main class name (Assumed to be main or Main if not entered)" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
       <HBox prefHeight="30.0" prefWidth="618.0" spacing="150.0">
          <children>
               <Button fx:id="createNewProject_CreateProject" alignment="CENTER" onAction="#createProject" style="-fx-background-color: #FFA258; -fx-text-fill: black;" text="Create Project" />

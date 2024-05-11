@@ -14,12 +14,12 @@ public class CreateNewProject {
             if (projectDirectory.mkdirs()) {
                 System.out.println("Project directory created successfully.");
 
-                // Create Student_Files directory inside the project directory
-                File studentFilesDirectory = new File(projectDirectoryPath + "/Student_Files");
+                // Create StudentProjects directory inside the project directory
+                File studentFilesDirectory = new File(projectDirectoryPath + "/StudentProjects");
                 if (studentFilesDirectory.mkdirs()) {
-                    System.out.println("Student_Files directory created successfully.");
+                    System.out.println("StudentProjects directory created successfully.");
                 } else {
-                    System.out.println("Failed to create Student_Files directory.");
+                    System.out.println("Failed to create StudentProjects directory.");
                     return;
                 }
             } else {

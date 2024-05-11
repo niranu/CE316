@@ -80,6 +80,9 @@ public class HelloController {
     @FXML
     private TableColumn<String[], String> resultColumn;
 
+    @FXML
+    private TextArea mainClassNameTextArea;
+
 
     @FXML
     private void createProject(ActionEvent event) {
@@ -102,25 +105,48 @@ public class HelloController {
 
             // Check if the JSON file exists
             if (jsonFile.exists()) {
-                // Copy the JSON file to the project directory
-                String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
-                File projectDirectory = new File(projectDirectoryPath);
 
-                if (!projectDirectory.exists()) {
-                    if (projectDirectory.mkdirs()) {
-                        System.out.println("Project directory created successfully.");
-                    } else {
-                        System.out.println("Failed to create project directory.");
-                        return;
+                System.out.println("json file exists.");
+
+                // Edit JSON content based on the main class name entered in the TextArea
+                String mainClassName = mainClassNameTextArea.getText();
+                System.out.println("selectedItemLowerCase:" + selectedItemLowerCase);
+
+                if(selectedItemLowerCase.trim().equals("java")){
+                    System.out.println("selected language is java");
+
+                    try {
+                        String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
+                        jsonContent = jsonContent.replace("{main}", mainClassName);
+
+                        // Save the edited JSON content to the project directory
+                        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+                        File projectDirectory = new File(projectDirectoryPath);
+
+                        if (!projectDirectory.exists()) {
+                            if (projectDirectory.mkdirs()) {
+                                System.out.println("Project directory created successfully.");
+                            } else {
+                                System.out.println("Failed to create project directory.");
+                                return;
+                            }
+                        }
+
+                        // Save the edited JSON content to the project directory with the project name as the filename
+                        Files.write(Paths.get(projectDirectoryPath + "/" + projectName + ".json"), jsonContent.getBytes());
+                        System.out.println("Edited JSON file saved to project directory successfully.");
+                    } catch (IOException e) {
+                        System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                     }
                 }
+                else if(selectedItemLowerCase.trim().equals("c++")){}
+                else if(selectedItemLowerCase.trim().equals("python")){}
+                else if(selectedItemLowerCase.trim().equals("c")){}
 
-                try {
-                    Files.copy(jsonFile.toPath(), new File(projectDirectoryPath + "/" + selectedItemLowerCase + ".json").toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println("JSON file copied to project directory successfully.");
-                } catch (IOException e) {
-                    System.out.println("An error occurred while copying JSON file: " + e.getMessage());
-                }
+
+
+                // Read the JSON file and replace placeholders with actual values
+
             } else {
                 System.out.println("JSON file not found for selected item.");
             }
@@ -130,6 +156,7 @@ public class HelloController {
 
         projectCreator.createProjectFile(projectName, description, expectedOutput);
     }
+
 
 
     private void copyJsonFile(String selectedItem, String projectName) {
