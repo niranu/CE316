@@ -21,6 +21,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -75,9 +79,10 @@ public class HelloController {
 
     @FXML
     private TableColumn<String[], String> resultColumn;
+
+
     @FXML
     private void createProject(ActionEvent event) {
-        // Code to handle creating a project
         System.out.println("Project creation initiated.");
         projectCreator = new CreateNewProject();
         String projectName = createNewProject_ProjectName.getText();
@@ -87,12 +92,57 @@ public class HelloController {
         String selectedItem = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             System.out.println("Selected item: " + selectedItem);
+
+            // Convert the selected item to lowercase for case-insensitive comparison
+            String selectedItemLowerCase = selectedItem.toLowerCase();
+
+            // Get the JSON file path based on the selected item
+            String jsonFilePath = "src/main/resources/Jsons/" + selectedItemLowerCase + ".json";
+            File jsonFile = new File(jsonFilePath);
+
+            // Check if the JSON file exists
+            if (jsonFile.exists()) {
+                // Copy the JSON file to the project directory
+                String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+                File projectDirectory = new File(projectDirectoryPath);
+
+                if (!projectDirectory.exists()) {
+                    if (projectDirectory.mkdirs()) {
+                        System.out.println("Project directory created successfully.");
+                    } else {
+                        System.out.println("Failed to create project directory.");
+                        return;
+                    }
+                }
+
+                try {
+                    Files.copy(jsonFile.toPath(), new File(projectDirectoryPath + "/" + selectedItemLowerCase + ".json").toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println("JSON file copied to project directory successfully.");
+                } catch (IOException e) {
+                    System.out.println("An error occurred while copying JSON file: " + e.getMessage());
+                }
+            } else {
+                System.out.println("JSON file not found for selected item.");
+            }
         } else {
             System.out.println("No item selected.");
         }
 
         projectCreator.createProjectFile(projectName, description, expectedOutput);
+    }
 
+
+    private void copyJsonFile(String selectedItem, String projectName) {
+        String jsonFileName = selectedItem.toLowerCase() + ".json";
+        Path source = Paths.get("src/main/resources/Jsons/" + jsonFileName);
+        Path destination = Paths.get("src/main/resources/Projects/" + projectName + "/" + jsonFileName);
+
+        try {
+            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("JSON file copied successfully.");
+        } catch (IOException e) {
+            System.out.println("Error copying JSON file: " + e.getMessage());
+        }
     }
 
     @FXML
