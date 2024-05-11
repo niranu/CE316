@@ -22,35 +22,42 @@ public class Compiler {
             }
 
             // Compiles the source code
+
+
             if (config.getBoolean("needs_compilation")) {
 
-                String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
-                System.out.println("Compiling with command: " + compileCommand);
-                Process compileProcess = Runtime.getRuntime().exec(compileCommand);
-                compileProcess.waitFor();
-                System.out.println("******");
+
+                String language = config.getString("language");
+
+                // Runs the compiled code
+                //src/main/resources/Projects/Library/StudentProjects/Main
+                if (language.equals("java")) {
+                    String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
+                    System.out.println("Compiling with command: " + compileCommand);
+                    Process compileProcess = Runtime.getRuntime().exec(compileCommand);
+                    compileProcess.waitFor();
+                    System.out.println("******");
+                    String runCommand = config.getString("run_command").replace("{classpath}", sourceCodePath);
+                    System.out.println("Running code from: " + runCommand);
+                    Process runProcess = Runtime.getRuntime().exec(runCommand);
+                    saveProcessOutput(runProcess, sourceCodePath);
+                    boolean match = Comparator(project, fileName);
+                    writeCSV(project, fileName, match);
+                }
+                if (language.equals("c") || language.equals("c++")) {
+                    String compileCommand = config.getString("command").replace("{source}", sourceCodePath+"HelloWorld"+".c");
+                    System.out.println("Compiling with command: " + compileCommand);
+                    Process compileProcess = Runtime.getRuntime().exec(compileCommand);
+                    compileProcess.waitFor();
+                    String runCommand = config.getString("run_command").replace("{source}", sourceCodePath);
+                    System.out.println("Running C code with command: " + runCommand);
+                    Process runProcess = Runtime.getRuntime().exec(runCommand);
+                    saveProcessOutput(runProcess, sourceCodePath);
+                    boolean match = Comparator(project, fileName);
+                    writeCSV(project, fileName, match);
+
+                }
             }
-            String language = config.getString("language");
-
-            // Runs the compiled code
-            //src/main/resources/Projects/Library/StudentProjects/Main
-            if(language.equals("java")){
-            String runCommand = config.getString("run_command").replace("{classpath}",sourceCodePath);
-            System.out.println("Running code from: " + runCommand);
-            Process runProcess = Runtime.getRuntime().exec(runCommand);
-            saveProcessOutput(runProcess,sourceCodePath);
-            boolean match = Comparator(project,fileName);
-            writeCSV(project,fileName,match);}
-            if(language.equals("c")  || language.equals("c++")){
-                String runCommand = config.getString("run_command").replace("{source}",sourceCodePath);
-                System.out.println("Running C code with command: " + runCommand);
-                Process runProcess = Runtime.getRuntime().exec(runCommand);
-                saveProcessOutput(runProcess, sourceCodePath);
-                boolean match = Comparator(project, fileName);
-                writeCSV(project, fileName, match);
-
-            }
-
 
 
         } catch (Exception e) {
@@ -184,7 +191,7 @@ public class Compiler {
     public static void main (String[] args) throws IOException {
         //Compiler cm = new Compiler();
         //compileAndRun("Library","456");
-        compileAndRun("HelloWorld","510");
+        compileAndRun("HelloWorld","551");
         //cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
