@@ -33,6 +33,6 @@ public class Configuration {
             writer.write("\n}\n");
         }
     }
-    
+
 }
 
