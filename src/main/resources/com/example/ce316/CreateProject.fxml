@@ -12,7 +12,7 @@
 <VBox alignment="CENTER" prefHeight="574.0" prefWidth="658.0" spacing="20" style="-fx-background-color: #4A3A7C; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
     <children>
         <Label style="-fx-text-fill: white; -fx-font-size: 24px;" text="Create New Project" />
-      <TextArea fx:id="createNewProject_ProjectName" prefHeight="58.0" prefWidth="618.0" promptText="Project Name" />
+      <TextArea fx:id="createNewProject_ProjectName" prefHeight="58.0" prefWidth="618.0" promptText="Project Name (It should be unique)" />
         <ComboBox fx:id="createNewProject_ConfigurationComboBox" promptText="Select Configration" style="-fx-background-color: #FFA258;">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -23,7 +23,7 @@
             </items>
         </ComboBox>
       <TextArea fx:id="createNewProject_ProjectDescription" prefHeight="139.0" prefWidth="618.0" promptText="Project Description (optional)" />
-      <TextArea fx:id="createNewProject_ExpectedOutput" prefHeight="90.0" prefWidth="618.0" promptText="Expected Output It Can Be Directly Written or You Can Choose a Code" />
+      <TextArea fx:id="createNewProject_ExpectedOutput" prefHeight="90.0" prefWidth="618.0" promptText="Expected Output (It Can Be Directly Written or You Can Choose a Code)" />
       <HBox prefHeight="54.0" prefWidth="618.0">
          <children>
             <Button mnemonicParsing="false" text="Upload Code" />
