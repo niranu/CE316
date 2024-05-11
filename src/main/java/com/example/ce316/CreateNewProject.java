@@ -15,13 +15,7 @@ public class CreateNewProject {
                 System.out.println("Project directory created successfully.");
 
                 // Create StudentProjects directory inside the project directory
-                File studentFilesDirectory = new File(projectDirectoryPath + "/StudentProjects");
-                if (studentFilesDirectory.mkdirs()) {
-                    System.out.println("StudentProjects directory created successfully.");
-                } else {
-                    System.out.println("Failed to create StudentProjects directory.");
-                    return;
-                }
+
             } else {
                 System.out.println("Failed to create project directory.");
                 return;
@@ -29,6 +23,14 @@ public class CreateNewProject {
         }
 
         try {
+            File studentProjectsDirectory = new File(projectDirectoryPath + "/StudentProjects");
+            if (studentProjectsDirectory.mkdirs()) {
+                System.out.println("StudentProjects directory created successfully.");
+            } else {
+                System.out.println("Failed to create StudentProjects directory.");
+                return;
+            }
+
             FileWriter descriptionWriter = new FileWriter(projectDirectoryPath + "/" + projectName + "_description.txt");
             descriptionWriter.write(description);
             descriptionWriter.close();
@@ -42,6 +44,7 @@ public class CreateNewProject {
             System.out.println("An error occurred while creating project files: " + e.getMessage());
         }
     }
+
 
 
 

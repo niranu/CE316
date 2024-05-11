@@ -1,5 +1,0 @@
-{
-  "needs_compilation": true,
-  "command": "javac {source}/{main}.java",
-  "run_command": "java -cp {classpath} {main}"
-}
