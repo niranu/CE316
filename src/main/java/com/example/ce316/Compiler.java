@@ -170,12 +170,12 @@ public class Compiler {
 
     }
 
-   /* public static void main (String[] args) throws IOException {
-        //compileAndRun("Library","456");
-        RunAll("Library");
+    public static void main (String[] args) throws IOException {
+        compileAndRun("HelloWorld","510");
+        //RunAll("Library");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
-    }*/
+    }
 
 
 }
