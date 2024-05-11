@@ -98,6 +98,13 @@ public class HelloController {
     @FXML
     private void cancel(ActionEvent event) {
         // Code to handle cancellation
+        // Clear text in TextAreas
+        createNewProject_ProjectName.clear();
+        createNewProject_ProjectDescription.clear();
+        createNewProject_ExpectedOutput.clear();
+
+        // Reset selection in ComboBox
+        createNewProject_ConfigurationComboBox.getSelectionModel().clearSelection();
         System.out.println("Operation cancelled.");
     }
 
