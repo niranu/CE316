@@ -179,6 +179,7 @@ public class HelloController {
         createNewProject_ProjectName.clear();
         createNewProject_ProjectDescription.clear();
         createNewProject_ExpectedOutput.clear();
+        mainClassNameTextArea.clear();
 
         // Reset selection in ComboBox
         createNewProject_ConfigurationComboBox.getSelectionModel().clearSelection();
