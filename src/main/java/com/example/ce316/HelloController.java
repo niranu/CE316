@@ -115,31 +115,38 @@ public class HelloController {
                     // Read the JSON file content
                     String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
 
-                    // Customize JSON content for languages that require compilation
-                    String mainClassName = mainClassNameTextArea.getText();
-                    if (jsonContent.contains("{main}")) {
-                        jsonContent = jsonContent.replace("{main}", mainClassName);
-                    }
+                    // Check if compilation is needed based on the JSON content
+                    boolean needsCompilation = jsonContent.contains("\"needs_compilation\": true");
 
-                    // Save the edited JSON content to the project directory
-                    String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
-                    File projectDirectory = new File(projectDirectoryPath);
-
-                    if (!projectDirectory.exists()) {
-                        if (projectDirectory.mkdirs()) {
-                            System.out.println("Project directory created successfully.");
-                        } else {
-                            System.out.println("Failed to create project directory.");
-                            return;
+                    if (needsCompilation) {
+                        // Customize JSON content for languages that require compilation
+                        String mainClassName = mainClassNameTextArea.getText();
+                        if (jsonContent.contains("{main}")) {
+                            jsonContent = jsonContent.replace("{main}", mainClassName);
                         }
+
+                        // Save the edited JSON content to the project directory
+                        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+                        File projectDirectory = new File(projectDirectoryPath);
+
+                        if (!projectDirectory.exists()) {
+                            if (projectDirectory.mkdirs()) {
+                                System.out.println("Project directory created successfully.");
+                            } else {
+                                System.out.println("Failed to create project directory.");
+                                return;
+                            }
+                        }
+
+                        // Copy the edited JSON file to the project directory with the project name as the filename
+                        String newJsonFileName = projectName + ".json";
+                        Path targetPath = Paths.get(projectDirectoryPath + "/" + newJsonFileName);
+                        Files.write(targetPath, jsonContent.getBytes());
+                        System.out.println("Edited JSON file saved to project directory successfully.");
+                    } else {
+                        System.out.println("Compilation not needed for selected language.");
+                        // Handle cases where compilation is not needed
                     }
-
-                    // Copy the edited JSON file to the project directory with the project name as the filename
-                    String newJsonFileName = projectName + ".json";
-                    Path targetPath = Paths.get(projectDirectoryPath + "/" + newJsonFileName);
-                    Files.write(targetPath, jsonContent.getBytes());
-                    System.out.println("Edited JSON file saved to project directory successfully.");
-
                 } catch (IOException e) {
                     System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                 }

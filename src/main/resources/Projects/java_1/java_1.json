@@ -1,0 +1,6 @@
+{
+  "language" :"java",
+  "needs_compilation": true,
+  "command": "javac {source}/mainclasss.java",
+  "run_command": "java -cp {classpath} mainclasss"
+}
