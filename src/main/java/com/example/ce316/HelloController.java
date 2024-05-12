@@ -87,7 +87,16 @@ public class HelloController {
     @FXML
     private TextArea mainClassNameTextArea;
 
-
+    @FXML
+    private TextArea languageTextArea;
+    @FXML
+    private ComboBox<String> needsCompilationComboBox;
+    @FXML
+    private TextArea compileCommandTextArea;
+    @FXML
+    private TextArea runCommandTextArea;
+    @FXML
+    private Button saveConfigurationButton;
     @FXML
     private void createProject(ActionEvent event) {
         System.out.println("Project creation initiated.");
@@ -340,6 +349,33 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
 
+    }
+    @FXML
+    private void handleSaveConfiguration(ActionEvent event) {
+        String language = languageTextArea.getText();
+        boolean needsCompilation;
+        String selected = needsCompilationComboBox.getSelectionModel().getSelectedItem();
+        if(selected.equals("Compiler")){
+            needsCompilation=true;
+        }else{
+            needsCompilation=false;
+        }
+
+        String compileCommand = compileCommandTextArea.getText();
+        String runCommand = runCommandTextArea.getText();
+
+        // Create the Configuration object with the input values
+        Configuration config = new Configuration(language, needsCompilation, compileCommand, runCommand);
+
+        // Attempt to save this configuration to a JSON file
+        try {
+            config.saveToJsonFile(language);  // Using the language as the file name for simplicity
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Configuration saved successfully.");
+            alert.showAndWait();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to save configuration: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     /*public void handleCreateProjectButtonAction(ActionEvent event){

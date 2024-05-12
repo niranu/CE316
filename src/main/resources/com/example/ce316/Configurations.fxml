@@ -7,12 +7,11 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0">
          <children>
@@ -36,11 +35,11 @@
                   <Insets top="8.0" />
                </padding>
             </Label>
-            <TextField prefHeight="26.0" prefWidth="536.0" promptText="Java, C, Python..." HBox.hgrow="ALWAYS">
+            <TextArea fx:id="languageTextArea" prefHeight="26.0" prefWidth="536.0" promptText="Java, C, Python..." HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
-            </TextField>
+            </TextArea>
          </children>
          <padding>
             <Insets top="5.0" />
@@ -74,7 +73,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <ComboBox prefHeight="26.0" prefWidth="229.0" style="-fx-background-color: #FFA258;">
+            <ComboBox fx:id="needsCompilationComboBox" prefHeight="26.0" prefWidth="229.0" style="-fx-background-color: #FFA258;">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Interpreter" />
@@ -92,12 +91,12 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="526.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="28.0" prefWidth="164.0" text="Compilation Command:" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label prefHeight="28.0" prefWidth="164.0" text="Command:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets left="7.0" top="10.0" />
                </padding>
             </Label>
-            <TextArea prefHeight="57.0" prefWidth="492.0" promptText="ex: javac {source}/{main}.java" HBox.hgrow="ALWAYS">
+            <TextArea fx:id="compileCommandTextArea" prefHeight="57.0" prefWidth="492.0" promptText="ex: javac {source}/{main}.java" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -114,7 +113,7 @@
                   <Insets left="7.0" top="10.0" />
                </padding>
             </Label>
-            <TextArea prefHeight="79.0" prefWidth="475.0" promptText="ex: java -cp {classpath} {main}" HBox.hgrow="ALWAYS">
+            <TextArea fx:id="runCommandTextArea" prefHeight="79.0" prefWidth="475.0" promptText="ex: java -cp {classpath} {main}" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -131,7 +130,7 @@
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Save Configurations" HBox.hgrow="ALWAYS">
+            <Button fx:id="saveConfigurationButton" mnemonicParsing="false" onAction="#handleSaveConfiguration" style="-fx-background-color: #FFA258;" text="Save Configurations" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>

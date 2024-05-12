@@ -189,10 +189,11 @@ public class Compiler {
     }
 
     public static void main (String[] args) throws IOException {
-        Compiler cm = new Compiler();
+        //Compiler cm = new Compiler();
         //compileAndRun("Library","456");
-
-        cm.RunAll("HelloWorld");
+        Configuration config = new Configuration("rUBY" , false, "asd","dsa");
+        config.saveToJsonFile(config.getLanguage());
+        //cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
     }

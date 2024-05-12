@@ -1,4 +1,5 @@
-{"language" :"python",
+{
+  "language" :"python",
   "needs_compilation": false,
   "command": "python {source}"
 }
