@@ -1,0 +1,1 @@
+This calculator prints the result of 5+5.
