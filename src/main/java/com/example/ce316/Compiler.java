@@ -47,7 +47,7 @@ public class Compiler {
                     writeCSV(project, fileName, match);
                 }
                 if (language.equals("c") || language.equals("c++")) {
-                    String compileCommand = config.getString("command").replace("{source}", sourceCodePath+fileName+".c");
+                    String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
                     System.out.println("Compiling with command: " + compileCommand);
                     Process compileProcess = Runtime.getRuntime().exec(compileCommand);
                     compileProcess.waitFor();

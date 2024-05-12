@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
         Image applicationIcon = new Image(getClass().getResourceAsStream("/Image/Logo.png"));
         stage.getIcons().add(applicationIcon);
 
-        // Setup the stage
+        // Set up the stage
         stage.setTitle("Integrated Assignment Environment");
         stage.setScene(scene);
         stage.show();

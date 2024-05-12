@@ -173,7 +173,7 @@ public class HelloController {
 
 
 
-    private void copyJsonFile(String selectedItem, String projectName) {
+    /*private void copyJsonFile(String selectedItem, String projectName) {
         String jsonFileName = selectedItem.toLowerCase() + ".json";
         Path source = Paths.get("src/main/resources/Jsons/" + jsonFileName);
         Path destination = Paths.get("src/main/resources/Projects/" + projectName + "/" + jsonFileName);
@@ -184,7 +184,7 @@ public class HelloController {
         } catch (IOException e) {
             System.out.println("Error copying JSON file: " + e.getMessage());
         }
-    }
+    }*/
 
     @FXML
     private void cancel(ActionEvent event) {

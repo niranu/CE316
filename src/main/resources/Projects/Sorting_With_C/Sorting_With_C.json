@@ -1,6 +1,6 @@
 {
   "language" :"c",
   "needs_compilation": true,
-  "command": "gcc {source} -o MyMainClass",
+  "command": "gcc {source}MyMainClass.c -o MyMainClass",
   "run_command": ".\\MyMainClass.exe"
 }
