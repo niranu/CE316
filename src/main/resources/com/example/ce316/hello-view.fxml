@@ -7,6 +7,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
@@ -55,7 +56,10 @@
             <items>
                 <TextFlow minWidth="200.0" prefHeight="373.0" prefWidth="300.0" style="-fx-background-color: #3A2C63;" textAlignment="JUSTIFY">
                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="This is IAE project. This app helps teachers assess their student s work easily. They can see all the projects. Run them one after another and see studentś reports. Configurations is a important part of this project. If you have anything you don't understand about the app you can click the Help menu in the Menu bar and a detailed explanation will " wrappingWidth="200.02149963378906" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PLEASE READ BEFORE USE : Prototype Note: Dear user, we would like to inform you that this application is currently a prototype, and some functions will not work. Manual: Please start by creating a project (For project name, please write without spaces). After creating a project, proceed to the &quot;Upload Student Files&quot; section to run student codes. However, we have not yet implemented the zip upload and extraction feature (as it has a further deadline). The program cannot run the recently created projects. You can choose from the currently available projects created in Java or C. Calculator/Library work with Java, Sorting/HelloWorld writed with C. After selection and running, you can view the information in Assignment Reports. You can select a configuration and create a config.json file for further usage." wrappingWidth="200.02149963378906">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Text>
                     </children>
                 </TextFlow>
                 <VBox alignment="CENTER" minWidth="300.0" prefHeight="375.0" prefWidth="379.0" spacing="20" style="-fx-background-color: #4A3A7C;">
