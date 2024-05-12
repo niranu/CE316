@@ -30,6 +30,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import com.opencsv.CSVReader;
 
+import javax.json.JsonObject;
+import javax.json.stream.JsonParser;
+
+
+
 public class HelloController {
     @FXML
     private Label welcomeText;
@@ -91,101 +96,55 @@ public class HelloController {
         String description = createNewProject_ProjectDescription.getText();
         String expectedOutput = createNewProject_ExpectedOutput.getText();
 
-        String selectedItem = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            System.out.println("Selected item: " + selectedItem);
+        String selectedLanguage = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
+        if (selectedLanguage != null) {
+            System.out.println("Selected item: " + selectedLanguage);
 
             // Convert the selected item to lowercase for case-insensitive comparison
-            String selectedItemLowerCase = selectedItem.toLowerCase();
+            String selectedLanguageLowerCase = selectedLanguage.toLowerCase();
 
             // Get the JSON file path based on the selected item
-            String jsonFilePath = "src/main/resources/Jsons/" + selectedItemLowerCase + ".json";
+            String jsonFilePath = "src/main/resources/Jsons/" + selectedLanguageLowerCase + ".json";
             File jsonFile = new File(jsonFilePath);
 
             // Check if the JSON file exists
             if (jsonFile.exists()) {
+                System.out.println("JSON file found for selected language.");
 
-                System.out.println("json file exists.");
+                try {
+                    // Read the JSON file content
+                    String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
 
-                // Edit JSON content based on the main class name entered in the TextArea
-                String mainClassName = mainClassNameTextArea.getText();
-                System.out.println("selectedItemLowerCase:" + selectedItemLowerCase);
-
-                if(selectedItemLowerCase.trim().equals("java")){
-                    System.out.println("selected language is java");
-
-                    try {
-                        String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
+                    // Customize JSON content for languages that require compilation
+                    String mainClassName = mainClassNameTextArea.getText();
+                    if (jsonContent.contains("{main}")) {
                         jsonContent = jsonContent.replace("{main}", mainClassName);
-
-                        // Save the edited JSON content to the project directory
-                        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
-                        File projectDirectory = new File(projectDirectoryPath);
-
-                        if (!projectDirectory.exists()) {
-                            if (projectDirectory.mkdirs()) {
-                                System.out.println("Project directory created successfully.");
-                            } else {
-                                System.out.println("Failed to create project directory.");
-                                return;
-                            }
-                        }
-
-                        // Save the edited JSON content to the project directory with the project name as the filename
-                        Files.write(Paths.get(projectDirectoryPath + "/" + projectName + ".json"), jsonContent.getBytes());
-                        System.out.println("Edited JSON file saved to project directory successfully.");
-                    } catch (IOException e) {
-                        System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                     }
-                }
-                else if(selectedItemLowerCase.trim().equals("c")) {
-                    System.out.println("Selected language is C.");
 
-                    try {
-                        // Read the C JSON template file
-                        String cJsonFilePath = "src/main/resources/Jsons/c.json";
-                        File cJsonFile = new File(cJsonFilePath);
+                    // Save the edited JSON content to the project directory
+                    String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+                    File projectDirectory = new File(projectDirectoryPath);
 
-                        if (cJsonFile.exists()) {
-                            String jsonContent = new String(Files.readAllBytes(cJsonFile.toPath()));
-
-                            // Customize JSON content for C language
-                            jsonContent = jsonContent.replace("{main}", mainClassName);
-
-                            // Save the edited JSON content to the project directory
-                            String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
-                            File projectDirectory = new File(projectDirectoryPath);
-
-                            if (!projectDirectory.exists()) {
-                                if (projectDirectory.mkdirs()) {
-                                    System.out.println("Project directory created successfully.");
-                                } else {
-                                    System.out.println("Failed to create project directory.");
-                                    return;
-                                }
-                            }
-
-                            // Save the edited JSON content to the project directory with the project name as the filename
-                            Files.write(Paths.get(projectDirectoryPath + "/" + projectName + ".json"), jsonContent.getBytes());
-                            System.out.println("Edited JSON file saved to project directory successfully.");
+                    if (!projectDirectory.exists()) {
+                        if (projectDirectory.mkdirs()) {
+                            System.out.println("Project directory created successfully.");
                         } else {
-                            System.out.println("C JSON file not found.");
+                            System.out.println("Failed to create project directory.");
+                            return;
                         }
-                    } catch (IOException e) {
-                        System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                     }
+
+                    // Copy the edited JSON file to the project directory with the project name as the filename
+                    String newJsonFileName = projectName + ".json";
+                    Path targetPath = Paths.get(projectDirectoryPath + "/" + newJsonFileName);
+                    Files.write(targetPath, jsonContent.getBytes());
+                    System.out.println("Edited JSON file saved to project directory successfully.");
+
+                } catch (IOException e) {
+                    System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                 }
-
-                else if(selectedItemLowerCase.trim().equals("c++")){}
-                else if(selectedItemLowerCase.trim().equals("python")){}
-
-
-
-
-                // Read the JSON file and replace placeholders with actual values
-
             } else {
-                System.out.println("JSON file not found for selected item.");
+                System.out.println("JSON file not found for selected language.");
             }
         } else {
             System.out.println("No item selected.");
@@ -193,6 +152,8 @@ public class HelloController {
 
         projectCreator.createProjectFile(projectName, description, expectedOutput);
     }
+
+
 
 
 
