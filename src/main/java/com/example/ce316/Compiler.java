@@ -2,6 +2,8 @@ package com.example.ce316;
 
 import java.io.*;
 import java.util.Locale;
+
+import javafx.scene.control.Alert;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -184,7 +186,14 @@ public class Compiler {
             System.out.println("Running code for student: " + studentDirectory.getName());
             compileAndRun(project, studentDirectory.getName()); // Pass the project name and student directory name
             System.out.println("Finished running code for student: " + studentDirectory.getName());
+
+
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText("Running successful! Check report screen from assignment report parts!");
+        alert.showAndWait();
 
     }
 
