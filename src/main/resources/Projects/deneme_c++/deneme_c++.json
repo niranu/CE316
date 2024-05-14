@@ -1,0 +1,6 @@
+{
+  "language" :"c++",
+  "needs_compilation": true,
+  "command": "g++ {source}Main.cpp -o Main",
+  "run_command": ".\\Main.exe"
+}

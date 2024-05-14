@@ -188,21 +188,21 @@ public class Compiler {
             System.out.println("Finished running code for student: " + studentDirectory.getName());
 
 
-        }
+        }/*
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.setContentText("Running successful! Check report screen from assignment report parts!");
-        alert.showAndWait();
+        alert.showAndWait();*/
 
     }
 
     public static void main (String[] args) throws IOException {
-        //Compiler cm = new Compiler();
-        //compileAndRun("Library","456");
-        Configuration config = new Configuration("rUBY" , false, "asd","dsa");
-        config.saveToJsonFile(config.getLanguage());
-        //cm.RunAll("HelloWorld");
+        Compiler cm = new Compiler();
+        //compileAndRun("deneme_c++","100");
+        //Configuration config = new Configuration("rUBY" , false, "asd","dsa");
+        //config.saveToJsonFile(config.getLanguage());
+        //cm.RunAll("deneme_c++");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
     }
