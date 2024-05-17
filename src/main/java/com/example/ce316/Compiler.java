@@ -103,7 +103,6 @@ public class Compiler {
         File outputFile = new File(studentProjectPath, "output.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write(output.toString());
-
             writer.write(errors.toString());
         }
     }
@@ -202,7 +201,8 @@ public class Compiler {
         //compileAndRun("deneme_c++","100");
         //Configuration config = new Configuration("rUBY" , false, "asd","dsa");
         //config.saveToJsonFile(config.getLanguage());
-        //cm.RunAll("deneme_c++");
+        cm.RunAll("deneme_c++");
+        //cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
     }
