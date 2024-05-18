@@ -429,6 +429,41 @@ public class HelloController {
         }
     }
 
+    @FXML
+    private void handleUploadCode() {
+        String projectName = createNewProject_ProjectName.getText();
+        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+
+        // Create the StudentProjects directory if it doesn't exist
+        File studentProjectsDirectory = new File(projectDirectoryPath);
+        if (!studentProjectsDirectory.exists()) {
+            if (studentProjectsDirectory.mkdirs()) {
+                System.out.println("StudentProjects directory created successfully.");
+            } else {
+                System.out.println("Failed to create StudentProjects directory.");
+                return;
+            }
+        }
+
+        // Open a FileChooser dialog for selecting the file to upload
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select File to Upload");
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null) {
+            // Copy the selected file to the StudentProjects directory
+            File destinationFile = new File(studentProjectsDirectory, selectedFile.getName());
+            try {
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Code file uploaded successfully: " + destinationFile.getAbsolutePath());
+            } catch (IOException e) {
+                System.out.println("An error occurred while uploading code file: " + e.getMessage());
+            }
+        } else {
+            System.out.println("File selection cancelled.");
+        }
+    }
+
     /*The order of keys in a JSON object is generally not guaranteed to be preserved because JSON
     objects are inherently unordered. When you create a JSON object and populate it with data using
     a library like org.json.JSONObject, the library does not enforce or guarantee any specific order

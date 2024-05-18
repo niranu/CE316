@@ -22,7 +22,7 @@
       <TextArea fx:id="createNewProject_ExpectedOutput" prefHeight="102.0" prefWidth="618.0" promptText="Expected Output (It Can Be Directly Written or You Can Choose a Code)" />
       <HBox prefHeight="54.0" prefWidth="618.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #FFA258;" text="Upload Code" />
+            <Button mnemonicParsing="false" onAction="#handleUploadCode" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #FFA258;" text="Upload Code" />
          </children>
       </HBox>
       <HBox prefHeight="42.0" prefWidth="618.0">
