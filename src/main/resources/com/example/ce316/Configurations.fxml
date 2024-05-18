@@ -76,8 +76,8 @@
             <ComboBox fx:id="needsCompilationComboBox" prefHeight="26.0" prefWidth="229.0" style="-fx-background-color: #FFA258;">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
+                       <String fx:value="Compiler" />
                         <String fx:value="Interpreter" />
-                        <String fx:value="Compiler" />
                     </FXCollections>
                 </items>
                <HBox.margin>

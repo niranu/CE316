@@ -201,7 +201,7 @@ public class Compiler {
         //compileAndRun("deneme_c++","100");
         //Configuration config = new Configuration("rUBY" , false, "asd","dsa");
         //config.saveToJsonFile(config.getLanguage());
-        cm.RunAll("deneme_c++");
+        cm.RunAll("HelloWorld");
         //cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);

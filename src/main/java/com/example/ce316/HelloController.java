@@ -66,6 +66,8 @@ public class HelloController {
     private ComboBox<String> createNewProject_ConfigurationComboBox= new ComboBox<>();
     @FXML
     private ComboBox<String> project_comboBox = new ComboBox<>();
+    @FXML
+    private ComboBox<String> config_comboBox = new ComboBox<>();
 
     CreateNewProject projectCreator;
 
@@ -99,6 +101,11 @@ public class HelloController {
     private TextArea runCommandTextArea;
     @FXML
     private Button saveConfigurationButton;
+
+    private Stage stage;
+    private Scene scene;
+    @FXML
+    private Parent root;
 
     @FXML
     private void createProject(ActionEvent event) {
@@ -203,12 +210,13 @@ public class HelloController {
         System.out.println("Operation cancelled.");
     }
 
-
+    @FXML
+    ObservableList <String>list2 = FXCollections.observableArrayList("Compiler", "Interpreter");
     @FXML
     void initialize() {
         project_comboBox.setOnShowing(event -> projectComboBox());
         createNewProject_ConfigurationComboBox.setOnShowing(event -> ConfigComboBox());
-
+        config_comboBox.setItems(list2);
 
 
     }
@@ -294,65 +302,9 @@ public class HelloController {
 
 
 
-    //Scene Changing when clicked on tha main window
-    private Stage stage;
-    private Scene scene;
-    @FXML
-    private Parent root;
-
-    public void setOpenExistingProjectButton(ActionEvent e) throws IOException {
-
-       //Pane view = new FXMLLoader(HelloApplication.class.getResource("OpenExisting.fxml")).load();
-        root = FXMLLoader.load(getClass().getResource("OpenExisting.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-   }
-
-    public void setCreateNewProjectButton(ActionEvent e) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("CreateProject.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
 
-    public void setAssignmentReportsButton(ActionEvent e) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("ReportAssignment.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
-    public void setBackButton(ActionEvent e) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    public void setUploadStudentButton(ActionEvent e) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("upload_Student.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void setConfigurations(ActionEvent e) throws IOException {
-
-        //Pane view = new FXMLLoader(HelloApplication.class.getResource("OpenExisting.fxml")).load();
-        root = FXMLLoader.load(getClass().getResource("Configurations.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
     @FXML
     private void handleSaveConfiguration(ActionEvent event) {
         String language = languageTextArea.getText();
@@ -392,7 +344,13 @@ public class HelloController {
                 JSONObject config = new JSONObject(tokener);
                 languageTextArea.setText(config.getString("language"));
                 boolean needsCompilation = config.getBoolean("needs_compilation");
-                needsCompilationComboBox.setValue(needsCompilation ? "compile" : "interpret");
+                System.out.println(needsCompilation);
+                if (needsCompilation) {
+                    config_comboBox.setValue(list2.get(0));
+                }
+                else{
+                    config_comboBox.setValue(list2.get(1));
+                }
                 compileCommandTextArea.setText(config.getString("command"));
                 runCommandTextArea.setText(config.getString("run_command"));
             } catch (IOException e) {
@@ -411,7 +369,12 @@ public class HelloController {
                 // Create a JSONObject and populate it with data from the UI elements
                 JSONObject config = new JSONObject();
                 config.put("language", languageTextArea.getText());
-                config.put("needs_compilation", "compile".equals(needsCompilationComboBox.getValue()));
+                String selected = needsCompilationComboBox.getSelectionModel().getSelectedItem();
+                if(selected.equals("Compiler")){
+                    config.put("needs_compilation",true);
+                }else{
+                    config.put("needs_compilation",false);
+                }
                 config.put("command", compileCommandTextArea.getText());
                 config.put("run_command", runCommandTextArea.getText());
 
@@ -497,6 +460,61 @@ public class HelloController {
                 System.err.println("Error unpacking projects: " + e.getMessage());
             }
         }
+    }
+    //Scene Changing when clicked on tha main window
+
+
+    public void setOpenExistingProjectButton(ActionEvent e) throws IOException {
+
+        //Pane view = new FXMLLoader(HelloApplication.class.getResource("OpenExisting.fxml")).load();
+        root = FXMLLoader.load(getClass().getResource("OpenExisting.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public void setCreateNewProjectButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("CreateProject.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public void setAssignmentReportsButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("ReportAssignment.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void setBackButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void setUploadStudentButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("upload_Student.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void setConfigurations(ActionEvent e) throws IOException {
+
+        //Pane view = new FXMLLoader(HelloApplication.class.getResource("OpenExisting.fxml")).load();
+        root = FXMLLoader.load(getClass().getResource("Configurations.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 }
