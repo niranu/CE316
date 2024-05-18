@@ -135,9 +135,6 @@ public class HelloController {
                     String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
 
                     // Check if compilation is needed based on the JSON content
-                    boolean needsCompilation = jsonContent.contains("\"needs_compilation\": true");
-
-                    if (needsCompilation) {
                         // Customize JSON content for languages that require compilation
                         String mainClassName = mainClassNameTextArea.getText();
                         if (jsonContent.contains("{main}")) {
@@ -162,10 +159,7 @@ public class HelloController {
                         Path targetPath = Paths.get(projectDirectoryPath + "/" + newJsonFileName);
                         Files.write(targetPath, jsonContent.getBytes());
                         System.out.println("Edited JSON file saved to project directory successfully.");
-                    } else {
-                        System.out.println("Compilation not needed for selected language.");
-                        // Handle cases where compilation is not needed
-                    }
+
                 } catch (IOException e) {
                     System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                 }

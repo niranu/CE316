@@ -2,5 +2,5 @@
   "language" :"java",
   "needs_compilation": true,
   "command": "javac {source}/Main.java",
-  "run_command": "java -cp {classpath} Main"
+  "run_command": "java -cp {source} Main"
 }

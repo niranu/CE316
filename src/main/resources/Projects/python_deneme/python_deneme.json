@@ -1,0 +1,5 @@
+{
+  "language" :"python",
+  "needs_compilation": false,
+  "command": "python {source}main.py"
+}

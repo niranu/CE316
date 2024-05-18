@@ -23,9 +23,6 @@ public class Compiler {
                 return;
             }
 
-            // Compiles the source code
-
-
             if (config.getBoolean("needs_compilation")) {
 
 
@@ -33,21 +30,20 @@ public class Compiler {
 
                 // Runs the compiled code
                 //src/main/resources/Projects/Library/StudentProjects/Main
-                if (language.equals("java")) {
+
                     String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
                     System.out.println("Compiling with command: " + compileCommand);
                     Process compileProcess = Runtime.getRuntime().exec(compileCommand);
                     compileProcess.waitFor();
-                    System.out.println("******");
-                    String runCommand = config.getString("run_command").replace("{classpath}", sourceCodePath);
+                    String runCommand = config.getString("run_command").replace("{source}", sourceCodePath);
                     System.out.println("Running code from: " + runCommand);
                     Process runProcess = Runtime.getRuntime().exec(runCommand);
                     saveProcessOutput(runProcess, sourceCodePath);
                     boolean match = Comparator(project, fileName);
                     writeCSV(project, fileName, match);
-                }
-                if (language.equals("c") || language.equals("c++")) {
-                    String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
+
+
+                    /*String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
                     System.out.println("Compiling with command: " + compileCommand);
                     Process compileProcess = Runtime.getRuntime().exec(compileCommand);
                     compileProcess.waitFor();
@@ -56,9 +52,19 @@ public class Compiler {
                     Process runProcess = Runtime.getRuntime().exec(runCommand);
                     saveProcessOutput(runProcess, sourceCodePath);
                     boolean match = Comparator(project, fileName);
-                    writeCSV(project, fileName, match);
+                    writeCSV(project, fileName, match);*/
 
-                }
+
+            }else{
+                // Execute Python script
+
+                String command = config.getString("command").replace("{source}", sourceCodePath);
+                System.out.println("Running Python script with command: " + command);
+                Process process = Runtime.getRuntime().exec(command);
+                saveProcessOutput(process, sourceCodePath);
+                boolean match = Comparator(project, fileName);
+                writeCSV(project, fileName, match);
+
             }
 
 
@@ -135,6 +141,7 @@ public class Compiler {
         String sourceLine;
         String outputLine;
 
+
         // Compare each line from both files
         while ((sourceLine = sourceReader.readLine()) != null && (outputLine = outputReader.readLine()) != null) {
 
@@ -143,7 +150,6 @@ public class Compiler {
             }
 
         }
-
         return true;
     }
     public static void writeCSV(String project, String studentID, boolean match) {
@@ -198,10 +204,14 @@ public class Compiler {
 
     public static void main (String[] args) throws IOException {
         Compiler cm = new Compiler();
-        //compileAndRun("deneme_c++","100");
+        //compileAndRun("python_deneme","23");
         //Configuration config = new Configuration("rUBY" , false, "asd","dsa");
         //config.saveToJsonFile(config.getLanguage());
         cm.RunAll("HelloWorld");
+        cm.RunAll("deneme_c++");
+        cm.RunAll("Library");
+        cm.RunAll("python_deneme");
+
         //cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
