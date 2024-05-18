@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
    <top>
     <MenuBar prefHeight="10.0" prefWidth="327.0" style="-fx-background-color: #FFA258;" BorderPane.alignment="CENTER">
       <menus>
@@ -81,7 +81,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="80.0" prefWidth="614.0" spacing="30.0" style="-fx-background-color: #4A3A7C;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Upload Zips" />
+            <Button mnemonicParsing="false" onAction="#handleSelectDirectory" style="-fx-background-color: #FFA258;" text="Upload Zips" />
             <Button mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Delete Zips" />
             <Button fx:id="RunButton" mnemonicParsing="false" onAction="#RunAllStudentFiles" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #FFA258;" text="Run" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #FFA258;" text="Extract Report" />

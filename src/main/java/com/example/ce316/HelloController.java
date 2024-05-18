@@ -480,12 +480,23 @@ public class HelloController {
     }*/
 
 
+    @FXML
+    protected void handleSelectDirectory() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select Directory Containing ZIP Files");
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
-
-
-
-
-
-
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if (selectedDirectory != null) {
+            String projectName = selectedDirectory.getName(); // Use the name of the selected directory as the project name
+            System.out.println("Selected Directory: " + selectedDirectory.getAbsolutePath());
+            try {
+                ProjectHandler.handleStudentProjects(selectedDirectory.getAbsolutePath(), projectName);
+                System.out.println("Projects unpacked successfully.");
+            } catch (IOException e) {
+                System.err.println("Error unpacking projects: " + e.getMessage());
+            }
+        }
+    }
 
 }
