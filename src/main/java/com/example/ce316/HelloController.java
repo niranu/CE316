@@ -14,12 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import com.opencsv.CSVReader;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import javax.json.JsonObject;
 import javax.json.stream.JsonParser;
@@ -87,6 +88,7 @@ public class HelloController {
     @FXML
     private TextArea mainClassNameTextArea;
 
+
     @FXML
     private TextArea languageTextArea;
     @FXML
@@ -97,6 +99,7 @@ public class HelloController {
     private TextArea runCommandTextArea;
     @FXML
     private Button saveConfigurationButton;
+
     @FXML
     private void createProject(ActionEvent event) {
         System.out.println("Project creation initiated.");
@@ -377,6 +380,64 @@ public class HelloController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private void handleImport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                JSONTokener tokener = new JSONTokener(fis);
+                JSONObject config = new JSONObject(tokener);
+                languageTextArea.setText(config.getString("language"));
+                boolean needsCompilation = config.getBoolean("needs_compilation");
+                needsCompilationComboBox.setValue(needsCompilation ? "compile" : "interpret");
+                compileCommandTextArea.setText(config.getString("command"));
+                runCommandTextArea.setText(config.getString("run_command"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    private void handleExport() {
+        // Open a DirectoryChooser dialog for selecting the directory
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File directory = directoryChooser.showDialog(new Stage());
+        if (directory != null) {
+            try {
+                // Create a JSONObject and populate it with data from the UI elements
+                JSONObject config = new JSONObject();
+                config.put("language", languageTextArea.getText());
+                config.put("needs_compilation", "compile".equals(needsCompilationComboBox.getValue()));
+                config.put("command", compileCommandTextArea.getText());
+                config.put("run_command", runCommandTextArea.getText());
+
+                // Use the language name as the file name
+                String fileName = languageTextArea.getText() + ".json";
+                File file = new File(directory, fileName);
+
+                // Write the JSONObject to the specified file
+                try (FileWriter fileWriter = new FileWriter(file)) {
+                    fileWriter.write(config.toString(4)); // Pretty print with an indent of 4 spaces
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /*The order of keys in a JSON object is generally not guaranteed to be preserved because JSON
+    objects are inherently unordered. When you create a JSON object and populate it with data using
+    a library like org.json.JSONObject, the library does not enforce or guarantee any specific order
+    for the keys. In your code snippet, the JSON keys (language, needs_compilation, command, run_command)
+     are added to the JSONObject (config) in the order you specified, but this order is not guaranteed
+     to be maintained when the JSON object is serialized to a string and written to a file. The JSON
+     format does not rely on key order for its structure; rather, it uses key-value pairs where keys
+     are unique identifiers for values. */
+
 
     /*public void handleCreateProjectButtonAction(ActionEvent event){
         projectCreater = new CreateNewProject();

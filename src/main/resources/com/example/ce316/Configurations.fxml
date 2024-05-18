@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0">
          <children>
@@ -135,12 +135,12 @@
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: #FFA258;" text="Export" HBox.hgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#handleExport" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: #FFA258;" text="Export" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #FFA258;" text="Import" HBox.hgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#handleImport" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #FFA258;" text="Import" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
