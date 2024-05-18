@@ -344,13 +344,7 @@ public class HelloController {
                 JSONObject config = new JSONObject(tokener);
                 languageTextArea.setText(config.getString("language"));
                 boolean needsCompilation = config.getBoolean("needs_compilation");
-                System.out.println(needsCompilation);
-                if (needsCompilation) {
-                    config_comboBox.setValue(list2.get(0));
-                }
-                else{
-                    config_comboBox.setValue(list2.get(1));
-                }
+                needsCompilationComboBox.setValue(needsCompilation ? "Compiler" : "Interpreter");
                 compileCommandTextArea.setText(config.getString("command"));
                 runCommandTextArea.setText(config.getString("run_command"));
             } catch (IOException e) {
@@ -369,12 +363,7 @@ public class HelloController {
                 // Create a JSONObject and populate it with data from the UI elements
                 JSONObject config = new JSONObject();
                 config.put("language", languageTextArea.getText());
-                String selected = needsCompilationComboBox.getSelectionModel().getSelectedItem();
-                if(selected.equals("Compiler")){
-                    config.put("needs_compilation",true);
-                }else{
-                    config.put("needs_compilation",false);
-                }
+                config.put("needs_compilation", "Compiler".equals(needsCompilationComboBox.getValue()));
                 config.put("command", compileCommandTextArea.getText());
                 config.put("run_command", runCommandTextArea.getText());
 
