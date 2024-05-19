@@ -1,5 +1,5 @@
 {
   "language" :"python",
   "needs_compilation": false,
-  "command": "python {source}MyMainClass.py"
+  "command": "python {source}MyMain.py"
 }

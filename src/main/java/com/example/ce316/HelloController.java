@@ -107,6 +107,8 @@ public class HelloController {
     @FXML
     private Parent root;
 
+    private String temporaryFilePath;
+
     //edit
     @FXML
     private ComboBox<String> editProject_ProjectNameComboBox = new ComboBox<>();
@@ -127,6 +129,7 @@ public class HelloController {
         String projectName = createNewProject_ProjectName.getText();
         String description = createNewProject_ProjectDescription.getText();
         String expectedOutput = createNewProject_ExpectedOutput.getText();
+        String mainClass = mainClassNameTextArea.getText();
 
         String selectedLanguage = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
         if (selectedLanguage != null) {
@@ -184,6 +187,34 @@ public class HelloController {
         }
 
         projectCreator.createProjectFile(projectName, description, expectedOutput);
+
+
+        //to relocate the code file to the project directory from Temporary directory.
+        String projectDirectory = "src/main/resources/Projects/" + projectName;
+        if (selectedLanguage.toLowerCase().equals("c++")){
+            String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + ".cpp";
+
+        }
+        else {
+            String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + "."+ selectedLanguage.toLowerCase();
+        }
+        System.out.println("Temporary file path is:" + temporaryFilePath);
+
+        if (temporaryFilePath != null) {
+            File temporaryFile = new File(temporaryFilePath);
+            File destinationFile = new File(projectDirectory, temporaryFile.getName());
+            try {
+                Files.move(temporaryFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Code file relocated to Project directory: " + destinationFile.getAbsolutePath());
+            } catch (IOException e) {
+                System.out.println("An error occurred while relocating code file to Project directory: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No code file uploaded to relocate.");
+        }
+
+
+
     }
 
 
@@ -426,15 +457,16 @@ public class HelloController {
     @FXML
     private void handleUploadCode() {
         String projectName = createNewProject_ProjectName.getText();
+        String temporaryDirectoryPath = "src/main/resources/Temporary/";
         String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
 
-        // Create the StudentProjects directory if it doesn't exist
-        File studentProjectsDirectory = new File(projectDirectoryPath);
-        if (!studentProjectsDirectory.exists()) {
-            if (studentProjectsDirectory.mkdirs()) {
-                System.out.println("StudentProjects directory created successfully.");
+        // Create the Temporary directory if it doesn't exist
+        File temporaryDirectory = new File(temporaryDirectoryPath);
+        if (!temporaryDirectory.exists()) {
+            if (temporaryDirectory.mkdirs()) {
+                System.out.println("Temporary directory created successfully.");
             } else {
-                System.out.println("Failed to create StudentProjects directory.");
+                System.out.println("Failed to create Temporary directory.");
                 return;
             }
         }
@@ -445,18 +477,25 @@ public class HelloController {
         File selectedFile = fileChooser.showOpenDialog(new Stage());
 
         if (selectedFile != null) {
-            // Copy the selected file to the StudentProjects directory
-            File destinationFile = new File(studentProjectsDirectory, selectedFile.getName());
+            // Copy the selected file to the Temporary directory
+            File temporaryFile = new File(temporaryDirectory, selectedFile.getName());
             try {
-                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Code file uploaded successfully: " + destinationFile.getAbsolutePath());
+                Files.copy(selectedFile.toPath(), temporaryFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Code file uploaded to Temporary directory: " + temporaryFile.getAbsolutePath());
             } catch (IOException e) {
-                System.out.println("An error occurred while uploading code file: " + e.getMessage());
+                System.out.println("An error occurred while uploading code file to Temporary directory: " + e.getMessage());
+                return;
             }
+
+            // Save the temporary file path for later relocation
+            temporaryFilePath = temporaryFile.getAbsolutePath();
+
+
         } else {
             System.out.println("File selection cancelled.");
         }
     }
+
 
     /*The order of keys in a JSON object is generally not guaranteed to be preserved because JSON
     objects are inherently unordered. When you create a JSON object and populate it with data using

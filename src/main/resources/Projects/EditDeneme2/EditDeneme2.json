@@ -1,6 +1,0 @@
-{
-  "language" :"c",
-  "needs_compilation": true,
-  "command": "gcc {source}MaMain.c -o MaMain",
-  "run_command": ".\\MaMain.exe"
-}
