@@ -107,6 +107,19 @@ public class HelloController {
     @FXML
     private Parent root;
 
+    //edit
+    @FXML
+    private ComboBox<String> editProject_ProjectNameComboBox = new ComboBox<>();
+    @FXML
+    private ChoiceBox<String> editProject_ChoiceBox = new ChoiceBox<>();
+    @FXML
+    private TextArea editProject_AssignmentDescription;
+    @FXML
+    private TextArea editProject_Output;
+    @FXML
+    private TextArea editProject_MainClass;
+
+
     @FXML
     private void createProject(ActionEvent event) {
         System.out.println("Project creation initiated.");
@@ -210,7 +223,11 @@ public class HelloController {
     void initialize() {
         project_comboBox.setOnShowing(event -> projectComboBox());
         createNewProject_ConfigurationComboBox.setOnShowing(event -> ConfigComboBox());
+        editProject_ProjectNameComboBox.setOnShowing(event -> editProjectComboBox());
+
         config_comboBox.setItems(list2);
+
+        configChoiceBox();
 
 
     }
@@ -236,6 +253,37 @@ public class HelloController {
         }
         project_comboBox.setItems(list);
     }
+    @FXML
+    private void editProjectComboBox() {
+        String projectsPath = "src/main/resources/Projects";
+        File ProjectsDirectory = new File(projectsPath);
+        File[] projectDirectories = ProjectsDirectory.listFiles(File::isDirectory);
+        ObservableList<String> list = FXCollections.observableArrayList();
+        assert projectDirectories != null;
+        for (File projectDirectory : projectDirectories) {
+            list.add(projectDirectory.getName());
+        }
+        editProject_ProjectNameComboBox.setItems(list);
+    }
+
+    @FXML
+    private void configChoiceBox() {
+        String jsonsPath = "src/main/resources/Jsons";
+        File jsonsDirectory = new File(jsonsPath);
+        File[] jsonFiles = jsonsDirectory.listFiles(File::isFile);
+        ObservableList<String> list = FXCollections.observableArrayList();
+        assert jsonFiles != null;
+        for (File file : jsonFiles) {
+            if (file.isFile() && file.getName().toLowerCase().endsWith(".json")) {
+                String fileName = file.getName();
+                // Remove the ".json" extension and add the name to the list
+                list.add(fileName.substring(0, fileName.lastIndexOf('.')));
+            }
+        }
+        editProject_ChoiceBox.setItems(list);
+    }
+
+
     private void ConfigComboBox() {
         String JsonsPath = "src/main/resources/Jsons";
         File JsonsDirectory = new File(JsonsPath);
@@ -499,5 +547,105 @@ public class HelloController {
         stage.show();
 
     }
+
+
+    // edit
+    public void edit() throws IOException {
+        String projectName = editProject_ProjectNameComboBox.getSelectionModel().getSelectedItem();
+        System.out.println(projectName);
+        String descriptionText = editProject_AssignmentDescription.getText();
+        String outputText = editProject_Output.getText();
+        String mainClass = editProject_MainClass.getText();
+        String configuration = editProject_ChoiceBox.getValue();
+
+        if (configuration != null) {
+            System.out.println("Selected configuration: " + configuration);
+
+            // Convert the selected item to lowercase for case-insensitive comparison
+            String selectedLanguageLowerCase = configuration.toLowerCase();
+
+            // Get the JSON file path based on the selected item
+            String jsonFilePath = "src/main/resources/Jsons/" + selectedLanguageLowerCase + ".json";
+            File jsonFile = new File(jsonFilePath);
+
+            // Check if the JSON file exists
+            if (jsonFile.exists()) {
+                System.out.println("JSON file found for selected language.");
+
+                try {
+                    // Read the JSON file content
+                    String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
+
+                    // Check if compilation is needed based on the JSON content
+                    // Customize JSON content for languages that require compilation
+                    String mainClassName = mainClass;
+                    if (jsonContent.contains("{main}")) {
+                        jsonContent = jsonContent.replace("{main}", mainClassName);
+                    }
+
+                    // Save the edited JSON content to the project directory
+                    String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+                    File projectDirectory = new File(projectDirectoryPath);
+
+                    if (!projectDirectory.exists()) {
+                        if (projectDirectory.mkdirs()) {
+                            System.out.println("Project directory created successfully.");
+                        } else {
+                            System.out.println("Failed to create project directory.");
+                            return;
+                        }
+                    }
+
+                    // Copy the edited JSON file to the project directory with the project name as the filename
+                    String newJsonFileName = projectName + ".json";
+                    Path targetPath = Paths.get(projectDirectoryPath + "/" + newJsonFileName);
+                    Files.write(targetPath, jsonContent.getBytes());
+                    System.out.println("Edited JSON file saved to project directory successfully.");
+
+                } catch (IOException e) {
+                    System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
+                }
+            } else {
+                System.out.println("JSON file not found for selected language.");
+            }
+        } else {
+            System.out.println("No item selected.");
+        }
+
+
+
+        if (projectName != null && descriptionText != null && outputText != null) {
+            // Update the description file
+            try {
+                // Define the description file path
+                String descriptionFilePath = "src/main/resources/Projects/" + projectName + "/" + projectName + "_description.txt";
+
+                // Create a FileWriter to write to the description file
+                FileWriter descriptionWriter = new FileWriter(new File(descriptionFilePath));
+                descriptionWriter.write(descriptionText);
+                descriptionWriter.close();
+                System.out.println("Description file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error updating description file: " + e.getMessage());
+            }
+
+            // Update the output file
+            try {
+                // Define the output file path
+                String outputFilePath = "src/main/resources/Projects/" + projectName + "/" + projectName + "_output.txt";
+
+                // Create a FileWriter to write to the output file
+                FileWriter outputWriter = new FileWriter(new File(outputFilePath));
+                outputWriter.write(outputText);
+                outputWriter.close();
+                System.out.println("Output file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error updating output file: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Project name, description text, or output text is null.");
+        }
+    }
+
 
 }

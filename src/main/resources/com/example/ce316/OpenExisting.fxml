@@ -15,17 +15,19 @@
     <center>
         <Pane prefHeight="466.0" prefWidth="614.0" style="-fx-background-color: #4A3A7C;">
             <children>
-                <ChoiceBox layoutX="22.0" layoutY="108.0" prefHeight="25.0" prefWidth="295.0" style="-fx-background-color: #FFA258;" />
-                <Label layoutX="24.0" layoutY="91.0" text="Configuration" textFill="WHITE" />
-                <Label layoutX="25.0" layoutY="145.0" text="Assignment Description" textFill="WHITE" />
-                <Label layoutX="23.0" layoutY="278.0" text="Output" textFill="WHITE" />
-                <TextArea layoutX="22.0" layoutY="295.0" prefHeight="53.0" prefWidth="547.0" />
-                <TextArea layoutX="23.0" layoutY="170.0" prefHeight="100.0" prefWidth="545.0" />
-                <Button layoutX="23.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Upload File" />
-                <Button layoutX="449.0" layoutY="386.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Edit" />
-                <Button fx:id="BackButton" layoutX="315.0" layoutY="386.0" mnemonicParsing="false" onAction="#setBackButton" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Back" />
-                <Label layoutX="24.0" layoutY="14.0" text="Project Name" textFill="WHITE" />
-            <ComboBox fx:id="project_comboBox" layoutX="23.0" layoutY="35.0" prefHeight="25.0" prefWidth="295.0" style="-fx-background-color: #FFA258;" />
+                <ChoiceBox fx:id="editProject_ChoiceBox" layoutX="22.0" layoutY="71.0" prefHeight="25.0" prefWidth="295.0" style="-fx-background-color: #FFA258;" />
+                <Label layoutX="23.0" layoutY="54.0" text="Configuration" textFill="WHITE" />
+                <Label layoutX="20.0" layoutY="109.0" text="Assignment Description" textFill="WHITE" />
+                <Label layoutX="23.0" layoutY="234.0" text="Output" textFill="WHITE" />
+                <TextArea fx:id="editProject_Output" layoutX="22.0" layoutY="251.0" prefHeight="53.0" prefWidth="547.0" />
+                <TextArea fx:id="editProject_AssignmentDescription" layoutX="23.0" layoutY="126.0" prefHeight="100.0" prefWidth="545.0" />
+                <Button layoutX="356.0" layoutY="401.0" mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Upload File" />
+                <Button layoutX="448.0" layoutY="401.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Edit" />
+                <Button fx:id="BackButton" layoutX="14.0" layoutY="401.0" mnemonicParsing="false" onAction="#setBackButton" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Back" />
+                <Label layoutX="24.0" layoutY="6.0" text="Project Name" textFill="WHITE" />
+            <ComboBox fx:id="editProject_ProjectNameComboBox" layoutX="22.0" layoutY="23.0" prefHeight="25.0" prefWidth="295.0" style="-fx-background-color: #FFA258;" />
+            <Label layoutX="32.0" layoutY="323.0" text="Main class" textFill="WHITE" />
+            <TextArea fx:id="editProject_MainClass" layoutX="22.0" layoutY="340.0" prefHeight="0.0" prefWidth="548.0" />
             </children>
         </Pane>
     </center>
