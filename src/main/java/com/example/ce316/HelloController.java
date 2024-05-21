@@ -120,6 +120,7 @@ public class HelloController {
     private TextArea editProject_Output;
     @FXML
     private TextArea editProject_MainClass;
+    Compiler compiler = new Compiler();
 
 
     @FXML
@@ -213,6 +214,14 @@ public class HelloController {
             System.out.println("No code file uploaded to relocate.");
         }
 
+        File projectDir = new File(projectDirectory);
+        File[] mainFiles = projectDir.listFiles((dir, name) -> name.matches(mainClass+"\\..+"));
+
+        if (mainFiles != null && mainFiles.length > 0) {
+            compiler.UserCodeRunner(projectName);
+        } else {
+            System.out.println("Main file not found, skipping UserCodeRunner.");
+        }
 
 
     }
@@ -264,7 +273,6 @@ public class HelloController {
     }
 
     //Run button action for Uploaded Student Files
-    Compiler compiler = new Compiler();
 
     @FXML
     private void RunAllStudentFiles(ActionEvent e) throws IOException {

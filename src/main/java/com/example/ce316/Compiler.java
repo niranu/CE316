@@ -73,6 +73,83 @@ public class Compiler {
         }
     }
 
+    //HOCANIN KODUNUN RUNLANMASI İÇİN YAPILAN KOPYA FONKSİYON
+    public static void UserCodeRunner(String project) {
+        String sourceCodePath = PROJECT_PATH + project+"/";
+        //src/main/resources/Projects/Library/StudentProjects/456/Main
+        try {
+            JSONObject config = getConfigurationByProject(project);
+            if (config == null) {
+                System.out.println("No configuration found for the specified language.");
+                return;
+            }
+
+            if (config.getBoolean("needs_compilation")) {
+
+                // Runs the compiled code
+                //src/main/resources/Projects/Library/StudentProjects/Main
+
+                String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
+                System.out.println("Compiling with command: " + compileCommand);
+                Process compileProcess = Runtime.getRuntime().exec(compileCommand);
+                compileProcess.waitFor();
+                String runCommand = config.getString("run_command").replace("{source}", sourceCodePath);
+                System.out.println("Running code from: " + runCommand);
+                Process runProcess = Runtime.getRuntime().exec(runCommand);
+                BufferedReader stdInput = new BufferedReader(new InputStreamReader(runProcess.getInputStream()));
+
+
+                StringBuilder output = new StringBuilder();
+
+                String line;
+
+                while ((line = stdInput.readLine()) != null) {
+                    output.append(line).append(System.lineSeparator());
+                }
+
+                // Write the output to the output.txt file
+                File outputFile = new File(sourceCodePath, project+"_output.txt");
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) { // 'true' for append mode
+                    writer.write(output.toString());
+                }
+
+
+
+
+            }else{
+                // Execute Python script
+
+                String command = config.getString("command").replace("{source}", sourceCodePath);
+                System.out.println("Running Python script with command: " + command);
+                Process process = Runtime.getRuntime().exec(command);
+                BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+
+                StringBuilder output = new StringBuilder();
+
+                String line;
+
+                while ((line = stdInput.readLine()) != null) {
+                    output.append(line).append(System.lineSeparator());
+                }
+
+                // Write the output to the output.txt file
+                File outputFile = new File(sourceCodePath, "_output.txt");
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) { // 'true' for append mode
+                    writer.write(output.toString());
+                }
+
+
+            }
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private static JSONObject getConfigurationByProject (String project){
         File configFile = new File(PROJECT_PATH + project + "/" + project.toLowerCase(Locale.ROOT) + ".json");
@@ -203,15 +280,17 @@ public class Compiler {
     }
 
     public static void main (String[] args) throws IOException {
-        Compiler cm = new Compiler();
+
+        //AŞŞAĞIDAKİ KOMUTLARIN HEPSİ DENEME KOMUTU
+        //Compiler cm = new Compiler();
         //compileAndRun("python_deneme","23");
         //Configuration config = new Configuration("rUBY" , false, "asd","dsa");
         //config.saveToJsonFile(config.getLanguage());
-        cm.RunAll("HelloWorld");
-        cm.RunAll("deneme_c++");
-        cm.RunAll("Library");
-        cm.RunAll("python_deneme");
-
+        // cm.RunAll("HelloWorld");
+        //cm.RunAll("deneme_c++");
+        //cm.RunAll("Library");
+        //cm.RunAll("python_deneme");
+        UserCodeRunner("zartzort");
         //cm.RunAll("HelloWorld");
         //System.out.println(Comparator("Library","456"));
         //writeCSV("Library","456",true);
