@@ -285,7 +285,7 @@ public class HelloController {
         project_comboBox.setItems(list);
     }
     @FXML
-    private void editProjectComboBox() {
+    private void editProjectComboBox(){
         String projectsPath = "src/main/resources/Projects";
         File ProjectsDirectory = new File(projectsPath);
         File[] projectDirectories = ProjectsDirectory.listFiles(File::isDirectory);
@@ -295,6 +295,28 @@ public class HelloController {
             list.add(projectDirectory.getName());
         }
         editProject_ProjectNameComboBox.setItems(list);
+
+    }
+    @FXML
+    public void editSet(ActionEvent event) throws IOException {
+        String projectName = editProject_ProjectNameComboBox.getSelectionModel().getSelectedItem();
+        String Path="src/main/resources/Projects/"+projectName+"/"+projectName;
+        BufferedReader description = new BufferedReader(new FileReader(Path+"_description.txt"));
+        BufferedReader output = new BufferedReader(new FileReader(Path+"_output.txt"));
+
+        editProject_AssignmentDescription.clear();
+        editProject_Output.clear();
+        String des;
+        String out;
+        while ((des= description.readLine())!=null){
+            editProject_AssignmentDescription.appendText(des+"\n");
+        }
+        while ((out= output.readLine())!=null){
+            editProject_Output.appendText(out+"\n");
+        }
+        description.close();
+        output.close();
+
     }
 
     @FXML
@@ -590,8 +612,12 @@ public class HelloController {
 
     // edit
     public void edit() throws IOException {
+
         String projectName = editProject_ProjectNameComboBox.getSelectionModel().getSelectedItem();
-        System.out.println(projectName);
+
+        // bu isimle projeyi bul içine yazdır
+
+
         String descriptionText = editProject_AssignmentDescription.getText();
         String outputText = editProject_Output.getText();
         String mainClass = editProject_MainClass.getText();
