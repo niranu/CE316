@@ -305,27 +305,63 @@ public class HelloController {
         editProject_ProjectNameComboBox.setItems(list);
 
     }
+
     @FXML
     public void editSet(ActionEvent event) throws IOException {
         String projectName = editProject_ProjectNameComboBox.getSelectionModel().getSelectedItem();
-        String Path="src/main/resources/Projects/"+projectName+"/"+projectName;
-        BufferedReader description = new BufferedReader(new FileReader(Path+"_description.txt"));
-        BufferedReader output = new BufferedReader(new FileReader(Path+"_output.txt"));
+        if (projectName == null) {
+            System.out.println("No project selected.");
+            return;
+        }
+
+        String projectPath = "src/main/resources/Projects/" + projectName + "/" + projectName;
+        BufferedReader description = new BufferedReader(new FileReader(projectPath + "_description.txt"));
+        BufferedReader output = new BufferedReader(new FileReader(projectPath + "_output.txt"));
+        BufferedReader jsonReader = new BufferedReader(new FileReader(projectPath + ".json"));
 
         editProject_AssignmentDescription.clear();
         editProject_Output.clear();
+
         String des;
         String out;
-        while ((des= description.readLine())!=null){
-            editProject_AssignmentDescription.appendText(des+"\n");
+        while ((des = description.readLine()) != null) {
+            editProject_AssignmentDescription.appendText(des + "\n");
         }
-        while ((out= output.readLine())!=null){
-            editProject_Output.appendText(out+"\n");
+        while ((out = output.readLine()) != null) {
+            editProject_Output.appendText(out + "\n");
         }
         description.close();
         output.close();
 
+        // Parse the language name from the JSON file
+        String language = null;
+        JSONObject jsonObject = new JSONObject(new JSONTokener(jsonReader));
+        if (jsonObject.has("language")) {
+            language = jsonObject.getString("language");
+        }
+        jsonReader.close();
+
+        // Check if the language is available in the JSON files
+        boolean languageAvailable = false;
+        File jsonsDirectory = new File("src/main/resources/Jsons");
+        File[] jsonFiles = jsonsDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"));
+        if (jsonFiles != null) {
+            for (File jsonFile : jsonFiles) {
+                if (jsonFile.getName().equalsIgnoreCase(language + ".json")) {
+                    languageAvailable = true;
+                    break;
+                }
+            }
+        }
+
+        if (languageAvailable) {
+            editProject_ChoiceBox.setValue(language);
+        } else {
+            editProject_ChoiceBox.setValue(null);
+            System.out.println("Language not available in JSON files.");
+        }
     }
+
 
     @FXML
     private void configChoiceBox() {
