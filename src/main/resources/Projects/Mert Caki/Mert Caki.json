@@ -1,0 +1,6 @@
+{
+  "language" :"java",
+  "needs_compilation": true,
+  "command": "javac {source}/pırt.java",
+  "run_command": "java -cp {source} pırt"
+}
