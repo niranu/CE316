@@ -7,12 +7,8 @@ import java.io.IOException;
 public class CreateNewProject {
 
     public void createProjectFile(String projectName, String description, String expectedOutput) {
-        // Sanitize the project name by replacing spaces with underscores
-        String sanitizedProjectName = projectName.replace(" ", "_");
-
-        String projectDirectoryPath = "src/main/resources/Projects/" + sanitizedProjectName;
+        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
         File projectDirectory = new File(projectDirectoryPath);
-
 
         if (!projectDirectory.exists()) {
             if (projectDirectory.mkdirs()) {

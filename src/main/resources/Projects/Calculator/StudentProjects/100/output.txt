@@ -1,2 +1,0 @@
-Error: Could not find or load main class Main
-Caused by: java.lang.ClassNotFoundException: Main
