@@ -120,6 +120,12 @@ public class HelloController {
     private TextArea editProject_Output;
     @FXML
     private TextArea editProject_MainClass;
+    @FXML
+    private Button editPtoject_DeleteCode;
+    @FXML
+    private Button editProject_UploadCode;
+
+
     Compiler compiler = new Compiler();
 
 
@@ -754,6 +760,144 @@ public class HelloController {
         } else {
             System.out.println("Project name, description text, or output text is null.");
         }
+
+        String projectDirectory = "src/main/resources/Projects/" + projectName;
+        String temporaryPath = "src/main/resources/Temporary";
+
+        File tempDir = new File(temporaryPath);
+        File[] filesToMove = tempDir.listFiles();
+
+        if (filesToMove != null) {
+            for (File file : filesToMove) {
+                if (file.isFile()) {
+                    Path sourcePath = file.toPath();
+                    Path destinationPath = Paths.get(projectDirectory, file.getName());
+
+                    try {
+                        // Move the file
+                        Files.move(sourcePath, destinationPath);
+                        System.out.println("File " + file.getName() + " moved successfully from " + temporaryPath + " to " + projectDirectory);
+                    } catch (IOException e) {
+                        System.err.println("Failed to move the file " + file.getName() + ": " + e.getMessage());
+                    }
+                }
+            }
+        } else {
+            System.out.println("No files to move in " + temporaryPath);
+        }
+
+    }
+
+    public void deleteCode (){
+        String projectName = editProject_ProjectNameComboBox.getValue();
+        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+        String mainClass = editProject_MainClass.getText();
+        System.out.println(mainClass);
+        String codePath;
+        String previousLanguage = null;
+
+
+        File directory = new File(projectDirectoryPath);
+        String previousMainClassName = null;
+
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles((dir, name) ->
+                    name.endsWith(".java") || name.endsWith(".c") || name.endsWith(".cpp") || name.endsWith(".py")
+            );
+
+            if (files != null && files.length > 0) {
+                previousMainClassName = files[0].getName();
+            }
+
+            if (files != null && files.length > 0) {
+                previousMainClassName = files[0].getName();
+
+                // Determine the file extension
+                if (previousMainClassName.endsWith(".java")) {
+                    previousLanguage = "java";
+                } else if (previousMainClassName.endsWith(".c")) {
+                    previousLanguage = "c";
+                } else if (previousMainClassName.endsWith(".cpp")) {
+                    previousLanguage = "cpp";
+                } else if (previousMainClassName.endsWith(".py")) {
+                    previousLanguage = "py";
+                }
+            }
+
+            System.out.println(previousLanguage);
+        }
+
+        System.out.println("Previous main class name: " + previousMainClassName);
+
+        String codeDirectory = projectDirectoryPath + "/" + previousMainClassName;
+        System.out.println(codeDirectory);
+
+        File fileToDelete = new File(codeDirectory);
+
+        // Delete the file
+        if (fileToDelete.delete()) {
+            System.out.println("File " + previousMainClassName + " was deleted successfully.");
+        } else {
+            System.out.println("Failed to delete the file " + previousMainClassName);
+        }
+
+
+
+        /*if (previousLanguage.equals("c++")){
+            codePath = projectDirectoryPath + mainClass + ".cpp";
+        }
+        else{
+            codePath = projectDirectoryPath + mainClass + editProject_ChoiceBox.getValue();
+        }
+
+        System.out.println(codePath);*/
+
+
+    }
+
+
+    @FXML
+    private void handleUploadCodeForEdit() {
+        String projectName = editProject_ProjectNameComboBox.getValue();
+        String temporaryDirectoryPath = "src/main/resources/Temporary/";
+        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+
+        // Create the Temporary directory if it doesn't exist
+        File temporaryDirectory = new File(temporaryDirectoryPath);
+        if (!temporaryDirectory.exists()) {
+            if (temporaryDirectory.mkdirs()) {
+                System.out.println("Temporary directory created successfully.");
+            } else {
+                System.out.println("Failed to create Temporary directory.");
+                return;
+            }
+        }
+
+        // Open a FileChooser dialog for selecting the file to upload
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select File to Upload");
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null) {
+            // Copy the selected file to the Temporary directory
+            File temporaryFile = new File(temporaryDirectory, selectedFile.getName());
+            try {
+                Files.copy(selectedFile.toPath(), temporaryFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Code file uploaded to Temporary directory: " + temporaryFile.getAbsolutePath());
+            } catch (IOException e) {
+                System.out.println("An error occurred while uploading code file to Temporary directory: " + e.getMessage());
+                return;
+            }
+
+            // Save the temporary file path for later relocation
+            temporaryFilePath = temporaryFile.getAbsolutePath();
+
+
+        } else {
+            System.out.println("File selection cancelled.");
+        }
+
+
     }
 
 

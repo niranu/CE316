@@ -1,0 +1,6 @@
+{
+  "language": "c++",
+  "needs_compilation": true,
+  "command": "g++ {source}Mainnn.cpp -o Mainnn",
+  "run_command": "Mainnn"
+}
