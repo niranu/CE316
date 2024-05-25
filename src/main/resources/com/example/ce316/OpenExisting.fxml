@@ -18,15 +18,16 @@
                 <Label layoutX="23.0" layoutY="234.0" text="Output" textFill="WHITE" />
                 <TextArea fx:id="editProject_Output" layoutX="22.0" layoutY="251.0" prefHeight="53.0" prefWidth="547.0" />
                 <TextArea fx:id="editProject_AssignmentDescription" layoutX="23.0" layoutY="126.0" prefHeight="100.0" prefWidth="545.0" />
-                <Button fx:id="editProject_UploadCode" layoutX="356.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleUploadCodeForEdit" style="-fx-background-color: #FFA258;" text="Upload File" />
-                <Button layoutX="448.0" layoutY="401.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Edit" />
-                <Button fx:id="BackButton" layoutX="14.0" layoutY="401.0" mnemonicParsing="false" onAction="#setBackButton" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #FFA258;" text="Back" />
+                <Button fx:id="editProject_UploadCode" layoutX="375.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleUploadCodeForEdit" style="-fx-background-color: #FFA258;" text="Upload Code" />
+                <Button layoutX="469.0" layoutY="401.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: #FFA258;" text="Edit" />
+                <Button fx:id="BackButton" layoutX="14.0" layoutY="401.0" mnemonicParsing="false" onAction="#setBackButton" prefHeight="26.0" prefWidth="81.0" style="-fx-background-color: #FFA258;" text="Back" />
                 <Label layoutX="24.0" layoutY="6.0" text="Project Name" textFill="WHITE" />
             <ComboBox fx:id="editProject_ProjectNameComboBox" layoutX="22.0" layoutY="23.0" prefHeight="25.0" prefWidth="295.0" style="-fx-background-color: #FFA258;" />
             <Label layoutX="32.0" layoutY="323.0" text="Main class" textFill="WHITE" />
             <TextArea fx:id="editProject_MainClass" layoutX="22.0" layoutY="340.0" prefHeight="0.0" prefWidth="548.0" />
             <Button layoutX="334.0" layoutY="23.0" mnemonicParsing="false" onAction="#editSet" style="-fx-background-color: #FFA258;" text="Refresh" />
-            <Button fx:id="editPtoject_DeleteCode" layoutX="265.0" layoutY="401.0" mnemonicParsing="false" onAction="#deleteCode" style="-fx-background-color: #FFA258;" text="Delete Code" />
+            <Button fx:id="editPtoject_DeleteCode" layoutX="286.0" layoutY="402.0" mnemonicParsing="false" onAction="#deleteCode" style="-fx-background-color: #FFA258;" text="Delete Code" />
+            <Button layoutX="409.0" layoutY="23.0" mnemonicParsing="false" onAction="#deleteProject" style="-fx-background-color: #FFA258;" text="Delete Project" />
             </children>
         </Pane>
     </center>

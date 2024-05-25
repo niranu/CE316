@@ -31,6 +31,9 @@ import com.opencsv.CSVReader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+
 import javax.json.JsonObject;
 import javax.json.stream.JsonParser;
 
@@ -126,6 +129,8 @@ public class HelloController {
     private Button editProject_UploadCode;
 
 
+
+
     Compiler compiler = new Compiler();
 
 
@@ -137,6 +142,8 @@ public class HelloController {
         String description = createNewProject_ProjectDescription.getText();
         String expectedOutput = createNewProject_ExpectedOutput.getText();
         String mainClass = mainClassNameTextArea.getText();
+
+
         if (projectName == null || projectName.trim().isEmpty()) {
             // Display error message
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -933,6 +940,35 @@ public class HelloController {
                 alert.showAndWait();
             }
         }
+    }
+
+    public void deleteProject(ActionEvent event){
+        String projectName = editProject_ProjectNameComboBox.getValue();
+        String projectDirectory = "src/main/resources/Projects/" + projectName;
+
+        Path path = Paths.get(projectDirectory);
+
+        try {
+            if (Files.exists(path)) {
+                Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+                    @Override
+                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                        Files.delete(file);
+                        return FileVisitResult.CONTINUE;
+                    }
+
+                    @Override
+                    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                        Files.delete(dir);
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
+            }
+            System.out.println("Directory deleted successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to delete directory: " + e.getMessage());
+        }
+
     }
 
 }
