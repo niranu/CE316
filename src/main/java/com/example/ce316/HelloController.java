@@ -298,6 +298,7 @@ public class HelloController {
         }
         project_comboBox.setItems(list);
     }
+
     @FXML
     private void editProjectComboBox(){
         String projectsPath = "src/main/resources/Projects";
@@ -569,21 +570,6 @@ public class HelloController {
     }
 
 
-    /*The order of keys in a JSON object is generally not guaranteed to be preserved because JSON
-    objects are inherently unordered. When you create a JSON object and populate it with data using
-    a library like org.json.JSONObject, the library does not enforce or guarantee any specific order
-    for the keys. In your code snippet, the JSON keys (language, needs_compilation, command, run_command)
-     are added to the JSONObject (config) in the order you specified, but this order is not guaranteed
-     to be maintained when the JSON object is serialized to a string and written to a file. The JSON
-     format does not rely on key order for its structure; rather, it uses key-value pairs where keys
-     are unique identifiers for values. */
-
-
-    /*public void handleCreateProjectButtonAction(ActionEvent event){
-        projectCreater = new CreateNewProject();
-        projectCreater.createProjectFile();
-    }*/
-
 
     @FXML
     protected void handleSelectDirectory() {
@@ -791,67 +777,67 @@ public class HelloController {
     public void deleteCode (){
         String projectName = editProject_ProjectNameComboBox.getValue();
         String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
-        String mainClass = editProject_MainClass.getText();
-        System.out.println(mainClass);
-        String codePath;
+        String jsonPath = projectDirectoryPath + "/" + projectName + ".json";
+        String codePath = null;
         String previousLanguage = null;
 
 
-        File directory = new File(projectDirectoryPath);
-        String previousMainClassName = null;
+        //get the previous language by json
+        try (FileInputStream fis = new FileInputStream(jsonPath)) {
+            JSONTokener tokener = new JSONTokener(fis);
+            JSONObject jsonObject = new JSONObject(tokener);
+            previousLanguage = jsonObject.getString("language");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Language from JSON: " + previousLanguage);
 
-        if (directory.exists() && directory.isDirectory()) {
-            File[] files = directory.listFiles((dir, name) ->
-                    name.endsWith(".java") || name.endsWith(".c") || name.endsWith(".cpp") || name.endsWith(".py")
-            );
+        //add json file names as extensions we need to check
+        String jsonDirectoryPath = "src/main/resources/Jsons";
+        File jsonDirectory = new File(jsonDirectoryPath);
+        ObservableList<String> fileList = FXCollections.observableArrayList();
 
-            if (files != null && files.length > 0) {
-                previousMainClassName = files[0].getName();
-            }
+        if (jsonDirectory.exists() && jsonDirectory.isDirectory()) {
+            File[] jsonFiles = jsonDirectory.listFiles((dir, name) -> name.endsWith(".json"));
 
-            if (files != null && files.length > 0) {
-                previousMainClassName = files[0].getName();
-
-                // Determine the file extension
-                if (previousMainClassName.endsWith(".java")) {
-                    previousLanguage = "java";
-                } else if (previousMainClassName.endsWith(".c")) {
-                    previousLanguage = "c";
-                } else if (previousMainClassName.endsWith(".cpp")) {
-                    previousLanguage = "cpp";
-                } else if (previousMainClassName.endsWith(".py")) {
-                    previousLanguage = "py";
+            if (jsonFiles != null) {
+                for (File jsonFile : jsonFiles) {
+                    String fileName = jsonFile.getName();
+                    String extension = fileName.substring(0, fileName.lastIndexOf('.'));
+                    fileList.add(extension);
                 }
             }
-
-            System.out.println(previousLanguage);
         }
 
-        System.out.println("Previous main class name: " + previousMainClassName);
+        //check if there is any file at the project directory with the extension from the observable list
+        File directory = new File(projectDirectoryPath);
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles((dir, name)-> {
+                for (String ext : fileList) {
+                    if (name.endsWith("." + ext) || name.endsWith(".cpp")) {
+                        return true;
+                    }
+                }
+                return false;
+            });
 
-        String codeDirectory = projectDirectoryPath + "/" + previousMainClassName;
-        System.out.println(codeDirectory);
+            if (files != null && files.length > 0) {
+                codePath = files[0].getAbsolutePath();
+            }
 
-        File fileToDelete = new File(codeDirectory);
+        }
 
-        // Delete the file
-        if (fileToDelete.delete()) {
-            System.out.println("File " + previousMainClassName + " was deleted successfully.");
+        //if there is any file with the any of the extensions delete it.
+        if (codePath != null) {
+            File fileToDelete = new File(codePath);
+            if (fileToDelete.delete()) {
+                System.out.println("File " + fileToDelete.getName() + " was deleted successfully.");
+            } else {
+                System.out.println("Failed to delete the file " + fileToDelete.getName());
+            }
         } else {
-            System.out.println("Failed to delete the file " + previousMainClassName);
+            System.out.println("No file found with matching extensions.");
         }
-
-
-
-        /*if (previousLanguage.equals("c++")){
-            codePath = projectDirectoryPath + mainClass + ".cpp";
-        }
-        else{
-            codePath = projectDirectoryPath + mainClass + editProject_ChoiceBox.getValue();
-        }
-
-        System.out.println(codePath);*/
-
 
     }
 
