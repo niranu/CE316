@@ -24,8 +24,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Integrated Assignment Environment");
         stage.setScene(scene);
         stage.show();
-    }// #FFA258
-
+    }
     public static void main(String[] args) {
         launch(args);
     }

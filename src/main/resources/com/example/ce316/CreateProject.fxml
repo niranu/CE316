@@ -27,7 +27,7 @@
       </HBox>
       <HBox prefHeight="42.0" prefWidth="618.0">
          <children>
-            <TextArea fx:id="mainClassNameTextArea" prefHeight="57.0" prefWidth="618.0" promptText="Main class name (Assumed to be main or Main if not entered)" HBox.hgrow="ALWAYS" />
+            <TextArea fx:id="mainClassNameTextArea" prefHeight="57.0" prefWidth="618.0" promptText="Main class name" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="379.0" spacing="60.0">

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="792.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
     <center>
       <VBox prefHeight="403.0" prefWidth="785.0" spacing="10.0" style="-fx-background-color: #4A3A7C;">
          <children>
@@ -19,7 +19,7 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="792.0" spacing="30.0" style="-fx-background-color: #4A3A7C;">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="792.0" spacing="50.0" style="-fx-background-color: #4A3A7C;">
                <children>
                   <ComboBox fx:id="editProject_ProjectNameComboBox" prefHeight="25.0" prefWidth="295.0" promptText="Choose project" style="-fx-background-color: #FFA258;" />
                   <Button mnemonicParsing="false" onAction="#editSet" style="-fx-background-color: #FFA258;" text="Refresh" />
@@ -38,23 +38,26 @@
             </ChoiceBox>
                 <Label text="Assignment Description" textFill="WHITE">
                <VBox.margin>
-                  <Insets right="650.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
                 <TextArea fx:id="editProject_AssignmentDescription" prefHeight="153.0" prefWidth="792.0" />
-                <Label text="Output" textFill="WHITE">
+                <Label prefHeight="18.0" prefWidth="72.0" text="Output" textFill="WHITE">
                <VBox.margin>
-                  <Insets right="720.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
                 <TextArea fx:id="editProject_Output" prefHeight="162.0" prefWidth="792.0" />
             <Label text="Main class" textFill="WHITE">
                <VBox.margin>
-                  <Insets right="720.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
             <TextArea fx:id="editProject_MainClass" prefHeight="0.0" prefWidth="792.0" />
          </children>
+         <BorderPane.margin>
+            <Insets left="30.0" right="30.0" />
+         </BorderPane.margin>
       </VBox>
     </center>
    <bottom>

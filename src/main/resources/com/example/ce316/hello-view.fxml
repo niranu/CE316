@@ -7,9 +7,9 @@
 
 <VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #3A2C63;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
     <children>
-        <SplitPane dividerPositions="0.5" prefHeight="391.0" prefWidth="659.0" VBox.vgrow="ALWAYS">
+        <SplitPane dividerPositions="0.2565864833906071" prefHeight="500.0" prefWidth="700.0" VBox.vgrow="ALWAYS">
             <items>
-                <TextFlow minWidth="200.0" prefHeight="373.0" prefWidth="300.0" style="-fx-background-color: #3A2C63;" textAlignment="JUSTIFY" />
+                <TextFlow minWidth="153.0" prefHeight="498.0" prefWidth="218.0" style="-fx-background-color: #3A2C63;" textAlignment="JUSTIFY" />
                 <VBox alignment="CENTER" minWidth="300.0" prefHeight="375.0" prefWidth="379.0" spacing="20" style="-fx-background-color: #4A3A7C;">
                     <children>
                         <Button fx:id="createNewProjectButton" mnemonicParsing="false" onAction="#setCreateNewProjectButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Create New Project" />

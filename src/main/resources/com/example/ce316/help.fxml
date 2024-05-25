@@ -7,35 +7,35 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #FFA258;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #FFA258;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelpController">
    <left>
       <Button fx:id="prevButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4A3A7C;" text="Previous" textFill="WHITE" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets left="50.0" right="50.0" />
+            <Insets left="20.0" right="20.0" />
          </BorderPane.margin></Button>
    </left>
    <right>
       <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4A3A7C;" text="Next" textFill="WHITE" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets left="50.0" right="50.0" />
+            <Insets left="20.0" right="20.0" />
          </BorderPane.margin></Button>
    </right>
    <center>
-      <StackPane fx:id="imageStackPane" prefHeight="639.0" prefWidth="662.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="imageStackPane" prefHeight="398.0" prefWidth="481.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="400.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="300.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@helpImages/CreateProjectHelp.jpg" />
                </image></ImageView>
-            <ImageView fitHeight="400.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="300.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@helpImages/EditProjectHelp.jpg" />
                </image></ImageView>
-            <ImageView fitHeight="400.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="300.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@helpImages/AssignmentReportsHelp.jpg" />
                </image></ImageView>
-            <ImageView fitHeight="400.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="300.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@helpImages/ConfigHelp.jpg" />
                </image></ImageView>
