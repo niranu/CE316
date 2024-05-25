@@ -645,6 +645,14 @@ public class HelloController {
 
     }
 
+    public void setHelpButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("help.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     // edit
     public void edit() throws IOException {

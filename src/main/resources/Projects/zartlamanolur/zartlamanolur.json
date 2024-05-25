@@ -1,6 +1,0 @@
-{
-  "language" :"c",
-  "needs_compilation": true,
-  "command": "gcc {source}HelloWorld.c -o HelloWorld",
-  "run_command": ".\\HelloWorld.exe"
-}

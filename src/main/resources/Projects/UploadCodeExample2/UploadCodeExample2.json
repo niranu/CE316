@@ -1,6 +1,0 @@
-{
-  "language" :"java",
-  "needs_compilation": true,
-  "command": "javac {source}/HelloWorld.java",
-  "run_command": "java -cp {classpath} HelloWorld"
-}

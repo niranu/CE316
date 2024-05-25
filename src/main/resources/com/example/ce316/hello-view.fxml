@@ -1,67 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
 <VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #3A2C63;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
     <children>
-        <MenuBar style="-fx-background-color: #FFA258;">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Open…" />
-                        <Menu mnemonicParsing="false" text="Open Recent" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As…" />
-                        <MenuItem mnemonicParsing="false" text="Revert" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Preferences…" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Quit" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Undo" />
-                        <MenuItem mnemonicParsing="false" text="Redo" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Cut" />
-                        <MenuItem mnemonicParsing="false" text="Copy" />
-                        <MenuItem mnemonicParsing="false" text="Paste" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Select All" />
-                        <MenuItem mnemonicParsing="false" text="Unselect All" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <SplitPane dividerPositions="0.31903765690376573" prefHeight="391.0" prefWidth="659.0" VBox.vgrow="ALWAYS">
+        <SplitPane dividerPositions="0.5" prefHeight="391.0" prefWidth="659.0" VBox.vgrow="ALWAYS">
             <items>
-                <TextFlow minWidth="200.0" prefHeight="373.0" prefWidth="300.0" style="-fx-background-color: #3A2C63;" textAlignment="JUSTIFY">
-                    <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PLEASE READ BEFORE USE : Prototype Note: Dear user, we would like to inform you that this application is currently a prototype, and some functions will not work. Manual: Please start by creating a project (For project name, please write without spaces). After creating a project, proceed to the &quot;Upload Student Files&quot; section to run student codes. However, we have not yet implemented the zip upload and extraction feature (as it has a further deadline). The program cannot run the recently created projects. You can choose from the currently available projects created in Java or C. Calculator/Library work with Java, Sorting/HelloWorld writed with C. After selection and running, you can view the information in Assignment Reports. You can select a configuration and create a config.json file for further usage." wrappingWidth="200.02149963378906">
-                     <font>
-                        <Font size="14.0" />
-                     </font></Text>
-                    </children>
-                </TextFlow>
+                <TextFlow minWidth="200.0" prefHeight="373.0" prefWidth="300.0" style="-fx-background-color: #3A2C63;" textAlignment="JUSTIFY" />
                 <VBox alignment="CENTER" minWidth="300.0" prefHeight="375.0" prefWidth="379.0" spacing="20" style="-fx-background-color: #4A3A7C;">
                     <children>
                         <Button fx:id="createNewProjectButton" mnemonicParsing="false" onAction="#setCreateNewProjectButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Create New Project" />
@@ -69,6 +17,7 @@
                   <Button mnemonicParsing="false" onAction="#setUploadStudentButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Run Students' Files" />
                         <Button fx:id="assignmentReportsButton" mnemonicParsing="false" onAction="#setAssignmentReportsButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Project Reports" />
                   <Button mnemonicParsing="false" onAction="#setConfigurations" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Configurations" />
+                  <Button mnemonicParsing="false" onAction="#setHelpButton" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFA258;" text="Help" />
                     </children>
                 </VBox>
             </items>

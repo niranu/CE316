@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #4A3A7C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelpController">
+   <left>
+      <Button fx:id="prevButton" mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Previous" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="50.0" right="20.0" />
+         </BorderPane.margin></Button>
+   </left>
+   <right>
+      <Button fx:id="nextButton" mnemonicParsing="false" style="-fx-background-color: #FFA258;" text="Next" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="20.0" right="50.0" />
+         </BorderPane.margin></Button>
+   </right>
+   <center>
+      <StackPane fx:id="imageStackPane" prefHeight="681.0" prefWidth="679.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="309.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@helpImages/CreateProjectHelp.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="398.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@helpImages/EditProjectHelp.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="398.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@helpImages/AssignmentReportsHelp.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="398.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@helpImages/ConfigHelp.jpg" />
+               </image></ImageView>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
