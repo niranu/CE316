@@ -33,6 +33,10 @@
                </image></ImageView>
             <ImageView fitHeight="300.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
                <image>
+                  <Image url="@helpImages/RunFileHelp.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="300.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
+               <image>
                   <Image url="@helpImages/AssignmentReportsHelp.jpg" />
                </image></ImageView>
             <ImageView fitHeight="300.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">

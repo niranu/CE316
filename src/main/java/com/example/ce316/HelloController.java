@@ -289,9 +289,7 @@ public class HelloController {
         editProject_ProjectNameComboBox.setOnShowing(event -> editProjectComboBox());
 
         config_comboBox.setItems(list2);
-
-        configChoiceBox();
-
+        editProject_ChoiceBox.setOnShowing(event -> ConfigComboBox());
 
     }
 
@@ -384,24 +382,6 @@ public class HelloController {
             editProject_ChoiceBox.setValue(null);
             System.out.println("Language not available in JSON files.");
         }
-    }
-
-
-    @FXML
-    private void configChoiceBox() {
-        String jsonsPath = "src/main/resources/Jsons";
-        File jsonsDirectory = new File(jsonsPath);
-        File[] jsonFiles = jsonsDirectory.listFiles(File::isFile);
-        ObservableList<String> list = FXCollections.observableArrayList();
-        assert jsonFiles != null;
-        for (File file : jsonFiles) {
-            if (file.isFile() && file.getName().toLowerCase().endsWith(".json")) {
-                String fileName = file.getName();
-                // Remove the ".json" extension and add the name to the list
-                list.add(fileName.substring(0, fileName.lastIndexOf('.')));
-            }
-        }
-        editProject_ChoiceBox.setItems(list);
     }
 
 

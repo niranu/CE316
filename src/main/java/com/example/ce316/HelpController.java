@@ -40,9 +40,10 @@ public class HelpController {
         Image image2 = new Image(getClass().getResourceAsStream("/com/example/ce316/helpImages/EditProjectHelp.jpg"));
         Image image3 = new Image(getClass().getResourceAsStream("/com/example/ce316/helpImages/AssignmentReportsHelp.jpg"));
         Image image4 = new Image(getClass().getResourceAsStream("/com/example/ce316/helpImages/ConfigHelp.jpg"));
+        Image image5 = new Image(getClass().getResourceAsStream("/com/example/ce316/helpImages/RunFileHelp.jpg"));
 
         // Initialize array of images
-        images = new ImageView[]{new ImageView(image1), new ImageView(image2), new ImageView(image3), new ImageView(image4)};
+        images = new ImageView[]{new ImageView(image1), new ImageView(image2), new ImageView(image5), new ImageView(image4), new ImageView(image3)};
 
         // Set initial image
         imageStackPane.getChildren().add(images[0]);
