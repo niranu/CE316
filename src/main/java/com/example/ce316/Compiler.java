@@ -42,19 +42,6 @@ public class Compiler {
                     boolean match = Comparator(project, fileName);
                     writeCSV(project, fileName, match);
 
-
-                    /*String compileCommand = config.getString("command").replace("{source}", sourceCodePath);
-                    System.out.println("Compiling with command: " + compileCommand);
-                    Process compileProcess = Runtime.getRuntime().exec(compileCommand);
-                    compileProcess.waitFor();
-                    String runCommand = config.getString("run_command").replace("{source}", sourceCodePath);
-                    System.out.println("Running C code with command: " + runCommand);
-                    Process runProcess = Runtime.getRuntime().exec(runCommand);
-                    saveProcessOutput(runProcess, sourceCodePath);
-                    boolean match = Comparator(project, fileName);
-                    writeCSV(project, fileName, match);*/
-
-
             }else{
                 // Execute Python script
 
@@ -270,31 +257,13 @@ public class Compiler {
             System.out.println("Finished running code for student: " + studentDirectory.getName());
 
 
-        }/*
+        }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.setContentText("Running successful! Check report screen from assignment report parts!");
-        alert.showAndWait();*/
+        alert.showAndWait();
 
     }
-
-    public static void main (String[] args) throws IOException {
-
-        //AŞŞAĞIDAKİ KOMUTLARIN HEPSİ DENEME KOMUTU
-        //Compiler cm = new Compiler();
-        //compileAndRun("python_deneme","23");
-        //Configuration config = new Configuration("rUBY" , false, "asd","dsa");
-        //config.saveToJsonFile(config.getLanguage());
-        // cm.RunAll("HelloWorld");
-        //cm.RunAll("deneme_c++");
-        //cm.RunAll("Library");
-        //cm.RunAll("python_deneme");
-        UserCodeRunner("zartzort");
-        //cm.RunAll("HelloWorld");
-        //System.out.println(Comparator("Library","456"));
-        //writeCSV("Library","456",true);
-    }
-
 
 }

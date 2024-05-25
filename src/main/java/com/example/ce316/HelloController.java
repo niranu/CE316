@@ -137,117 +137,138 @@ public class HelloController {
         String description = createNewProject_ProjectDescription.getText();
         String expectedOutput = createNewProject_ExpectedOutput.getText();
         String mainClass = mainClassNameTextArea.getText();
+        if (projectName == null || projectName.trim().isEmpty()) {
+            // Display error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Project name cannot be empty!");
+            alert.showAndWait();
+        } else {
 
-        String selectedLanguage = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
-        if (selectedLanguage != null) {
-            System.out.println("Selected item: " + selectedLanguage);
+            String selectedLanguage = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
+            if (selectedLanguage != null) {
+                System.out.println("Selected item: " + selectedLanguage);
 
-            // Convert the selected item to lowercase for case-insensitive comparison
-            String selectedLanguageLowerCase = selectedLanguage.toLowerCase();
+                // Convert the selected item to lowercase for case-insensitive comparison
+                String selectedLanguageLowerCase = selectedLanguage.toLowerCase();
 
-            // Get the JSON file path based on the selected item
-            String jsonFilePath = "src/main/resources/Jsons/" + selectedLanguageLowerCase + ".json";
-            File jsonFile = new File(jsonFilePath);
+                // Get the JSON file path based on the selected item
+                String jsonFilePath = "src/main/resources/Jsons/" + selectedLanguageLowerCase + ".json";
+                File jsonFile = new File(jsonFilePath);
 
-            // Check if the JSON file exists
-            if (jsonFile.exists()) {
-                System.out.println("JSON file found for selected language.");
+                // Check if the JSON file exists
+                if (jsonFile.exists()) {
+                    System.out.println("JSON file found for selected language.");
+                    if (mainClass == null || mainClass.trim().isEmpty()){
+                        // Display error message
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Main class name cannot be empty!");
+                        alert.showAndWait();
+                    }else {
 
-                try {
-                    // Read the JSON file content
-                    String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
+                        try {
+                            // Read the JSON file content
+                            String jsonContent = new String(Files.readAllBytes(jsonFile.toPath()));
 
-                    // Check if compilation is needed based on the JSON content
-                        // Customize JSON content for languages that require compilation
-                        String mainClassName = mainClassNameTextArea.getText();
-                        if (jsonContent.contains("{main}")) {
-                            jsonContent = jsonContent.replace("{main}", mainClassName);
-                        }
+                            // Check if compilation is needed based on the JSON content
+                            // Customize JSON content for languages that require compilation
 
-                        // Save the edited JSON content to the project directory
-                        String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
-                        File projectDirectory = new File(projectDirectoryPath);
-
-                        if (!projectDirectory.exists()) {
-                            if (projectDirectory.mkdirs()) {
-                                System.out.println("Project directory created successfully.");
-                            } else {
-                                System.out.println("Failed to create project directory.");
-                                return;
+                            if (jsonContent.contains("{main}")) {
+                                jsonContent = jsonContent.replace("{main}", mainClass);
                             }
+
+                            // Save the edited JSON content to the project directory
+                            String projectDirectoryPath = "src/main/resources/Projects/" + projectName;
+                            File projectDirectory = new File(projectDirectoryPath);
+
+                            if (!projectDirectory.exists()) {
+                                if (projectDirectory.mkdirs()) {
+                                    System.out.println("Project directory created successfully.");
+                                } else {
+                                    System.out.println("Failed to create project directory.");
+                                    return;
+                                }
+                            }
+
+
+                            // Copy the edited JSON file to the project directory with the project name as the filename
+                            String newJsonFileName = projectName + ".json";
+                            Path targetPath = Paths.get(projectDirectoryPath + "/" + newJsonFileName);
+                            Files.write(targetPath, jsonContent.getBytes());
+                            System.out.println("Edited JSON file saved to project directory successfully.");
+
+
+                        } catch (IOException e) {
+                            System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                         }
+                    }
+                } else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("There is no such configuration available");
+                    alert.showAndWait();
 
-                        // Copy the edited JSON file to the project directory with the project name as the filename
-                        String newJsonFileName = projectName + ".json";
-                        Path targetPath = Paths.get(projectDirectoryPath + "/" + newJsonFileName);
-                        Files.write(targetPath, jsonContent.getBytes());
-                        System.out.println("Edited JSON file saved to project directory successfully.");
 
-                } catch (IOException e) {
-                    System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                 }
             } else {
-                System.out.println("JSON file not found for selected language.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("You have to select a language");
+                alert.showAndWait();
             }
-        } else {
-            System.out.println("No item selected.");
-        }
-
-        projectCreator.createProjectFile(projectName, description, expectedOutput);
 
 
-        //to relocate the code file to the project directory from Temporary directory.
-        String projectDirectory = "src/main/resources/Projects/" + projectName;
-        if (selectedLanguage.toLowerCase().equals("c++")){
-            String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + ".cpp";
+            projectCreator.createProjectFile(projectName, description, expectedOutput);
 
-        }
-        else {
-            String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + "."+ selectedLanguage.toLowerCase();
-        }
-        System.out.println("Temporary file path is:" + temporaryFilePath);
 
-        if (temporaryFilePath != null) {
-            File temporaryFile = new File(temporaryFilePath);
-            File destinationFile = new File(projectDirectory, temporaryFile.getName());
-            try {
-                Files.move(temporaryFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Code file relocated to Project directory: " + destinationFile.getAbsolutePath());
-            } catch (IOException e) {
-                System.out.println("An error occurred while relocating code file to Project directory: " + e.getMessage());
+            //to relocate the code file to the project directory from Temporary directory.
+            String projectDirectory = "src/main/resources/Projects/" + projectName;
+            if (selectedLanguage.toLowerCase().equals("c++")){
+                String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + ".cpp";
+
             }
-        } else {
-            System.out.println("No code file uploaded to relocate.");
-        }
+            else {
+                String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + "."+ selectedLanguage.toLowerCase();
+            }
+            System.out.println("Temporary file path is:" + temporaryFilePath);
 
-        File projectDir = new File(projectDirectory);
-        File[] mainFiles = projectDir.listFiles((dir, name) -> name.matches(mainClass+"\\..+"));
+            if (temporaryFilePath != null) {
+                File temporaryFile = new File(temporaryFilePath);
+                File destinationFile = new File(projectDirectory, temporaryFile.getName());
+                try {
+                    Files.move(temporaryFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println("Code file relocated to Project directory: " + destinationFile.getAbsolutePath());
+                } catch (IOException e) {
+                    System.out.println("An error occurred while relocating code file to Project directory: " + e.getMessage());
+                }
+            } else {
+                System.out.println("No code file uploaded to relocate.");
+            }
 
-        if (mainFiles != null && mainFiles.length > 0) {
-            compiler.UserCodeRunner(projectName);
-        } else {
-            System.out.println("Main file not found, skipping UserCodeRunner.");
+            File projectDir = new File(projectDirectory);
+            File[] mainFiles = projectDir.listFiles((dir, name) -> name.matches(mainClass+"\\..+"));
+
+            if (mainFiles != null && mainFiles.length > 0) {
+                Compiler.UserCodeRunner(projectName);
+            } else {
+                System.out.println("Main file not found, skipping UserCodeRunner.");
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Project created succesfully");
+            alert.showAndWait();
         }
 
 
     }
 
 
-
-
-
-    /*private void copyJsonFile(String selectedItem, String projectName) {
-        String jsonFileName = selectedItem.toLowerCase() + ".json";
-        Path source = Paths.get("src/main/resources/Jsons/" + jsonFileName);
-        Path destination = Paths.get("src/main/resources/Projects/" + projectName + "/" + jsonFileName);
-
-        try {
-            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("JSON file copied successfully.");
-        } catch (IOException e) {
-            System.out.println("Error copying JSON file: " + e.getMessage());
-        }
-    }*/
 
     @FXML
     private void cancel(ActionEvent event) {
@@ -445,12 +466,6 @@ public class HelloController {
 
 
 
-
-
-
-
-
-
     @FXML
     private void handleSaveConfiguration(ActionEvent event) {
         String language = languageTextArea.getText();
@@ -583,9 +598,18 @@ public class HelloController {
             System.out.println("Selected Directory: " + selectedDirectory.getAbsolutePath());
             try {
                 ProjectHandler.handleStudentProjects(selectedDirectory.getAbsolutePath(), projectName);
-                System.out.println("Projects unpacked successfully.");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Your Zips unpacked OK.");
+                alert.showAndWait();
             } catch (IOException e) {
                 System.err.println("Error unpacking projects: " + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Cannot unpacked your zips!");
+                alert.showAndWait();
             }
         }
     }
@@ -652,16 +676,13 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
+    //Scene changing ends
 
 
     // edit
     public void edit() throws IOException {
 
         String projectName = editProject_ProjectNameComboBox.getSelectionModel().getSelectedItem();
-
-        // bu isimle projeyi bul içine yazdır
-
-
         String descriptionText = editProject_AssignmentDescription.getText();
         String outputText = editProject_Output.getText();
         String mainClass = editProject_MainClass.getText();
@@ -687,9 +708,8 @@ public class HelloController {
 
                     // Check if compilation is needed based on the JSON content
                     // Customize JSON content for languages that require compilation
-                    String mainClassName = mainClass;
                     if (jsonContent.contains("{main}")) {
-                        jsonContent = jsonContent.replace("{main}", mainClassName);
+                        jsonContent = jsonContent.replace("{main}", mainClass);
                     }
 
                     // Save the edited JSON content to the project directory
@@ -779,6 +799,11 @@ public class HelloController {
         } else {
             System.out.println("No files to move in " + temporaryPath);
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText("Your file is edited");
+        alert.showAndWait();
 
     }
 
