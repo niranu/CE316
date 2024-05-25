@@ -18,6 +18,9 @@ public class HelpController {
 
     @FXML
     private Parent root;
+    private Stage stage;
+    private Scene scene;
+
 
     @FXML
     private Button prevButton;
@@ -68,6 +71,13 @@ public class HelpController {
     private void updateImage() {
         imageStackPane.getChildren().clear();
         imageStackPane.getChildren().add(images[currentIndex]);
+    }
+    public void setBackButton(ActionEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
