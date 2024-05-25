@@ -145,29 +145,29 @@ public class HelloController {
             alert.setContentText("Project name cannot be empty!");
             alert.showAndWait();
         } else {
+            if (mainClass == null || mainClass.trim().isEmpty()) {
+                // Display error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Main class name cannot be empty!");
+                alert.showAndWait();
+            } else {
+                String selectedLanguage = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
+                if (selectedLanguage != null){
+                    System.out.println("Selected item: " + selectedLanguage);
 
-            String selectedLanguage = createNewProject_ConfigurationComboBox.getSelectionModel().getSelectedItem();
-            if (selectedLanguage != null) {
-                System.out.println("Selected item: " + selectedLanguage);
+                    // Convert the selected item to lowercase for case-insensitive comparison
+                    String selectedLanguageLowerCase = selectedLanguage.toLowerCase();
 
-                // Convert the selected item to lowercase for case-insensitive comparison
-                String selectedLanguageLowerCase = selectedLanguage.toLowerCase();
+                    // Get the JSON file path based on the selected item
+                    String jsonFilePath = "src/main/resources/Jsons/" + selectedLanguageLowerCase + ".json";
+                    File jsonFile = new File(jsonFilePath);
 
-                // Get the JSON file path based on the selected item
-                String jsonFilePath = "src/main/resources/Jsons/" + selectedLanguageLowerCase + ".json";
-                File jsonFile = new File(jsonFilePath);
+                    // Check if the JSON file exists
+                    if (jsonFile.exists()) {
+                        System.out.println("JSON file found for selected language.");
 
-                // Check if the JSON file exists
-                if (jsonFile.exists()) {
-                    System.out.println("JSON file found for selected language.");
-                    if (mainClass == null || mainClass.trim().isEmpty()){
-                        // Display error message
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Main class name cannot be empty!");
-                        alert.showAndWait();
-                    }else {
 
                         try {
                             // Read the JSON file content
@@ -205,67 +205,55 @@ public class HelloController {
                             System.out.println("An error occurred while editing or saving JSON file: " + e.getMessage());
                         }
                     }
-                } else{
+                    projectCreator.createProjectFile(projectName, description, expectedOutput);
+
+
+                    //to relocate the code file to the project directory from Temporary directory.
+                    String projectDirectory = "src/main/resources/Projects/" + projectName;
+                    if (selectedLanguage.toLowerCase().equals("c++")) {
+                        String temporaryFilePath = "src/main/resources/Temporary/" + mainClass + ".cpp";
+
+                    } else {
+                        String temporaryFilePath = "src/main/resources/Temporary/" + mainClass + "." + selectedLanguage.toLowerCase();
+                    }
+                    System.out.println("Temporary file path is:" + temporaryFilePath);
+
+                    if (temporaryFilePath != null) {
+                        File temporaryFile = new File(temporaryFilePath);
+                        File destinationFile = new File(projectDirectory, temporaryFile.getName());
+                        try {
+                            Files.move(temporaryFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            System.out.println("Code file relocated to Project directory: " + destinationFile.getAbsolutePath());
+                        } catch (IOException e) {
+                            System.out.println("An error occurred while relocating code file to Project directory: " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("No code file uploaded to relocate.");
+                    }
+
+                    File projectDir = new File(projectDirectory);
+                    File[] mainFiles = projectDir.listFiles((dir, name) -> name.matches(mainClass + "\\..+"));
+
+                    if (mainFiles != null && mainFiles.length > 0) {
+                        Compiler.UserCodeRunner(projectName);
+                    } else {
+                        System.out.println("Main file not found, skipping UserCodeRunner.");
+                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Project created succesfully");
+                    alert.showAndWait();
+
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
-                    alert.setContentText("There is no such configuration available");
+                    alert.setContentText("Choose configuration");
                     alert.showAndWait();
-
-
                 }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("You have to select a language");
-                alert.showAndWait();
             }
-
-
-            projectCreator.createProjectFile(projectName, description, expectedOutput);
-
-
-            //to relocate the code file to the project directory from Temporary directory.
-            String projectDirectory = "src/main/resources/Projects/" + projectName;
-            if (selectedLanguage.toLowerCase().equals("c++")){
-                String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + ".cpp";
-
-            }
-            else {
-                String temporaryFilePath = "src/main/resources/Temporary/" + mainClass  + "."+ selectedLanguage.toLowerCase();
-            }
-            System.out.println("Temporary file path is:" + temporaryFilePath);
-
-            if (temporaryFilePath != null) {
-                File temporaryFile = new File(temporaryFilePath);
-                File destinationFile = new File(projectDirectory, temporaryFile.getName());
-                try {
-                    Files.move(temporaryFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println("Code file relocated to Project directory: " + destinationFile.getAbsolutePath());
-                } catch (IOException e) {
-                    System.out.println("An error occurred while relocating code file to Project directory: " + e.getMessage());
-                }
-            } else {
-                System.out.println("No code file uploaded to relocate.");
-            }
-
-            File projectDir = new File(projectDirectory);
-            File[] mainFiles = projectDir.listFiles((dir, name) -> name.matches(mainClass+"\\..+"));
-
-            if (mainFiles != null && mainFiles.length > 0) {
-                Compiler.UserCodeRunner(projectName);
-            } else {
-                System.out.println("Main file not found, skipping UserCodeRunner.");
-            }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Project created succesfully");
-            alert.showAndWait();
         }
-
-
     }
 
 
