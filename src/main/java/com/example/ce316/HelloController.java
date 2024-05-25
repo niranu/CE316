@@ -143,6 +143,7 @@ public class HelloController {
         String expectedOutput = createNewProject_ExpectedOutput.getText();
         String mainClass = mainClassNameTextArea.getText();
 
+        projectName = projectName.replace(" ", "");
 
         if (projectName == null || projectName.trim().isEmpty()) {
             // Display error message

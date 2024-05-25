@@ -11,7 +11,7 @@
 <VBox alignment="CENTER" prefHeight="500.0" prefWidth="700.0" spacing="20" style="-fx-background-color: #4A3A7C; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316.HelloController">
     <children>
         <Label style="-fx-text-fill: white; -fx-font-size: 24px;" text="Create New Project" />
-      <TextArea fx:id="createNewProject_ProjectName" prefHeight="5.0" prefWidth="618.0" promptText="Project Name (It should be unique)(PLEASE ENTER WITH NO SPACE)" />
+      <TextArea fx:id="createNewProject_ProjectName" prefHeight="5.0" prefWidth="618.0" promptText="Project Name (It should be unique)" />
         <ComboBox fx:id="createNewProject_ConfigurationComboBox" prefHeight="26.0" prefWidth="614.0" promptText="Select Configuration" style="-fx-background-color: #FFA258;">
             <items>
                 <FXCollections fx:factory="observableArrayList">
