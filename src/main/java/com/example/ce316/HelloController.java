@@ -893,6 +893,33 @@ public class HelloController {
 
 
     }
+    @FXML
+    private void handleExportReport(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Report");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        fileChooser.setInitialFileName("report.txt");
 
+        File userDirectory = new File(System.getProperty("user.home"));
+        if (userDirectory.canRead()) {
+            fileChooser.setInitialDirectory(userDirectory);
+        }
+
+        File file = fileChooser.showSaveDialog(new Stage());
+        if (file != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (String[] row : reportTable.getItems()) {
+                    writer.write(String.join("\t", row));
+                    writer.newLine();
+                }
+                writer.flush();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Report exported successfully.");
+                alert.showAndWait();
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to export report: " + e.getMessage());
+                alert.showAndWait();
+            }
+        }
+    }
 
 }
